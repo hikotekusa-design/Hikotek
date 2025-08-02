@@ -1,7 +1,8 @@
 import React from 'react';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { FaFacebook, FaInstagram, FaXTwitter, FaTiktok, FaPinterest, FaYoutube } from "react-icons/fa6";
-import HikotekLogo from '/Hikotek_Logo.png';
+import HikotekLogo from '../assets/Hikotek_Logo.png';
+
 
 
 const Footer = () => {

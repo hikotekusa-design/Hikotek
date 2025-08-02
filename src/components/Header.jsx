@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Header.css';
-import HikotekLogo from '/Hikotek_Logo.png';
+import HikotekLogo from '../assets/Hikotek_Logo.png';
 import ProductDropdown from './ProductDropdown'; 
 
 function Header() {

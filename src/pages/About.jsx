@@ -1,4 +1,6 @@
 import React from 'react';
+import HikotekLogo from '../assets/Hikotek_Logo.png';
+
 
 const About = () => {
   const bannerImage = 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/llBplKmolkSRjlrnokiqiq/huaban-1-da.png';
@@ -20,7 +22,7 @@ const About = () => {
       {/* Centered Logo Section Below Banner */}
       <section className="bg-white flex flex-col items-center py-10 text-center">
         <img
-          src="/Hikotek_Logo.png" // Replace with actual logo URL or path
+          src={HikotekLogo} // Replace with actual logo URL or path
           alt="Hikotek Logo"
           className="h-24 sm:h-28 object-contain drop-shadow-md mb-4"
         />
