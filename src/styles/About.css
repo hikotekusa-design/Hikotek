@@ -1,0 +1,105 @@
+/* Custom gradients, effects, and animations not covered by Tailwind CDN */
+.about-hero {
+  background: linear-gradient(135deg, #001f3f 0%, #4b79a1 50%, #ffffff 100%); /* Enhanced gradient */
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/abstract-pattern.png') no-repeat center/cover;
+  opacity: 0.2;
+  z-index: 0;
+  transform: translateY(0);
+}
+
+.company-name,
+.company-content,
+.cta-button {
+  position: relative;
+  z-index: 1; /* Above background pattern */
+}
+
+.company-image {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.company-image:hover {
+  transform: scale(1.05);
+}
+
+.company-image.fallback {
+  opacity: 0.8;
+  filter: grayscale(30%) blur(2px);
+  border: 1px solid #e2e8f0;
+}
+
+.company-profile,
+.why-choose-us,
+.our-partners {
+  background: rgba(255, 255, 255, 0.92); /* Refined glassmorphism */
+  backdrop-filter: blur(10px);
+}
+
+.partner-card {
+  background: rgba(248, 250, 252, 0.95); /* Slightly opaque off-white */
+  backdrop-filter: blur(10px);
+}
+
+/* Custom Animations */
+@keyframes parallax {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+@keyframes gradient-text {
+  0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+  50% { text-shadow: 0 0 20px rgba(250, 204, 21, 0.9); }
+  100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
+}
+
+@keyframes fade-in-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in {
+  0% { width: 0; }
+  100% { width: 80px; }
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Browser compatibility for backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .company-profile,
+  .why-choose-us,
+  .our-partners,
+  .partner-card {
+    background: rgba(255, 255, 255, 0.98); /* Fallback */
+  }
+  .partner-card {
+    background: rgba(248, 250, 252, 0.98);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-hero {
+    background: linear-gradient(135deg, #001f3f 0%, #4b79a1 70%, #e2e8f0 100%); /* Softer for mobile */
+  }
+  .company-name {
+    font-size: 3rem;
+  }
+  .company-content {
+    font-size: 1rem;
+  }
+}
