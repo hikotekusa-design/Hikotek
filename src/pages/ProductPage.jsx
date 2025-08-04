@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaStar, FaFileDownload } from 'react-icons/fa';
 import EnquiryForm from '../components/EnquiryForm'; // Make sure the path is correct
 
@@ -7,6 +7,10 @@ const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState('https://www.faithfulltools.com/images/full/FAICALVER.jpg');
   const [zoomStyle, setZoomStyle] = useState({});
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
+
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const tabs = ['description', 'downloads', 'reviews'];
 
