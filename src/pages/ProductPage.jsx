@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { FaStar, FaFileDownload } from 'react-icons/fa';
+import EnquiryForm from '../components/EnquiryForm'; // Make sure the path is correct
 
 const ProductPage = () => {
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState('https://www.faithfulltools.com/images/full/FAICALVER.jpg');
   const [zoomStyle, setZoomStyle] = useState({});
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
 
   const tabs = ['description', 'downloads', 'reviews'];
 
@@ -23,6 +25,10 @@ const ProductPage = () => {
       transform: 'scale(1)',
       transformOrigin: 'center center',
     });
+  };
+
+  const toggleEnquiryModal = () => {
+    setShowEnquiryModal(!showEnquiryModal);
   };
 
   const renderContent = () => {
@@ -107,6 +113,10 @@ const ProductPage = () => {
 
   return (
     <div className="min-h-screen w-full overflow-x-hidden bg-white p-6 sm:p-10">
+      {showEnquiryModal && (
+        <EnquiryForm onClose={toggleEnquiryModal} />
+      )}
+      
       <div className="max-w-[1400px] mx-auto w-full">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Thumbnails and Main Image */}
@@ -152,7 +162,10 @@ const ProductPage = () => {
             <p className="text-gray-600 text-lg"><strong>Warranty:</strong> 1 Year</p>
             <p className="text-green-600 font-medium mt-4 text-xl">In Stock</p>
             <p className="text-blue-600 font-bold text-2xl mt-6">Price: 795.00 SAR (Including VAT)</p>
-            <button className="bg-blue-700 text-white mt-6 px-8 py-3 rounded-lg text-lg hover:bg-blue-800 transition">
+            <button 
+              onClick={toggleEnquiryModal}
+              className="bg-blue-700 text-white mt-6 px-8 py-3 rounded-lg text-lg hover:bg-blue-800 transition"
+            >
               Enquire Now
             </button>
           </div>

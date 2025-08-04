@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 import HikotekLogo from '../assets/Hikotek_Logo.png';
-import ProductDropdown from './ProductDropdown'; 
+import ProductDropdown from './ProductDropdown';
+import GlobeMap from './GlobeMap';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isGlobeDropdownOpen, setIsGlobeDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleGlobeDropdown = () => setIsGlobeDropdownOpen(!isGlobeDropdownOpen);
+  const toggleMobileMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const toggleGlobeDropdown = () => {
-    setIsGlobeDropdownOpen(!isGlobeDropdownOpen);
+  const handleProductsClick = () => {
+    if (isMobile) {
+      navigate('/moreproducts');
+      setIsMenuOpen(false);
+    }
   };
 
   return (
@@ -34,6 +40,9 @@ function Header() {
       {/* Main Header */}
       <nav className="main-header">
         <div className="nav-left">
+          <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+          </button>
           <a href="/">
             <img src={HikotekLogo} alt="Hikotek Logo" className="logo" />
           </a>
@@ -41,11 +50,7 @@ function Header() {
 
         <div className="search-bar-container">
           <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search products"
-              aria-label="Search"
-            />
+            <input type="text" placeholder="Search products" aria-label="Search" />
             <button type="button">
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -59,16 +64,26 @@ function Header() {
         </div>
       </nav>
 
-      {/* Nav Menu Bar (below header) */}
-      <div className="nav-center-bar">
+      {/* Nav Menu Bar */}
+      <div className={`nav-center-bar ${isMenuOpen ? 'mobile-open' : ''}`}>
         <div className="nav-center">
-          <a href="/">Home</a>
-          <a href="/about">About Us</a>
-          <ProductDropdown />
-          <a href="/contact">Contact Us</a>
-          <a href="/distributor">Distributor Apply</a>
+          <a href="/" onClick={toggleMobileMenu}>Home</a>
+          <a href="/about" onClick={toggleMobileMenu}>About Us</a>
+          {isMobile ? (
+            <a href="/moreproducts" onClick={handleProductsClick}>Products</a>
+          ) : (
+            <ProductDropdown />
+          )}
+          <a href="/contact" onClick={toggleMobileMenu}>Contact Us</a>
+          <a href="/distributor" onClick={toggleMobileMenu}>Distributor Apply</a>
         </div>
       </div>
+
+      {/* Modal for Globe */}
+      <GlobeMap 
+        isOpen={isGlobeDropdownOpen} 
+        onClose={() => setIsGlobeDropdownOpen(false)} 
+      />
     </>
   );
 }

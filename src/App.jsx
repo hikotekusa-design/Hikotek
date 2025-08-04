@@ -10,6 +10,8 @@ import Contact from './pages/Contact'
 import DistributorApply from './pages/DistributorApply'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import MoreProdutsPg from './pages/MoreProdutsPg'
+import ChatBot from './components/ChatBot'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,8 +25,11 @@ function App() {
       <Route path='/products' element={<ProductPage/>} ></Route>
       <Route path='/contact' element={<Contact/>}></Route>
       <Route path='/distributor' element={<DistributorApply/>}></Route>
+      <Route path='/moreproducts' element={<MoreProdutsPg/>}></Route>
+
 
     </Routes>
+    <ChatBot/>
     <Footer/>
       
     </>

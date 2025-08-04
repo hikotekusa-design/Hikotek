@@ -1,4 +1,6 @@
-/* Top Bar (default font) */
+/* Header.css */
+
+/* Top Bar */
 .top-bar {
   background-color: rgb(10, 77, 184);
   color: white;
@@ -6,37 +8,22 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.8rem;
-  padding: 0.3rem 1rem;
+  padding: 0.3rem 2rem;
   height: 40px;
 }
 
-.top-bar-left {
+.top-bar-left,
+.top-bar-center,
+.top-bar-right {
   display: flex;
   align-items: center;
 }
 
-.top-bar-left span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.top-bar-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
+.top-bar-left span,
 .top-bar-center span {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.top-bar-right {
-  display: flex;
-  align-items: center;
 }
 
 .top-bar-right a {
@@ -46,19 +33,39 @@
   font-size: 0.9rem;
 }
 
-/* Main Header with Industry Demi */
+/* Main Header */
 .main-header {
+  position: sticky;     
+  top: 0;               
+  z-index: 999;         
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1.5rem;
-  background-color: #ffffff;
+  padding: 0.75rem 2rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  color: #717781;
+}
+
+
+.nav-left {
+  display: flex;
+  align-items: center;
 }
 
 .nav-left .logo {
   width: 140px;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: rgb(10, 77, 184);
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  z-index: 101;
 }
 
 .search-bar-container {
@@ -70,8 +77,8 @@
 
 .search-bar {
   display: flex;
-  border: 1px solid rgb(10, 77, 184); /* dark slate border */
-  border-radius: 9999px; /* full pill */
+  border: 1px solid rgb(10, 77, 184);
+  border-radius: 9999px;
   overflow: hidden;
   max-width: 600px;
   width: 100%;
@@ -96,83 +103,122 @@
 }
 
 .search-bar button:hover {
-  background-color: #0f172a; /* darker slate */
-}
-
-.nav-right {
-  position: relative;
+  background-color: #0f172a;
 }
 
 .nav-right .fas.fa-globe {
   font-size: 1.95rem;
   color: rgb(10, 77, 184);
   cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.globe-dropdown {
-  position: relative;
+.nav-right .fas.fa-globe:hover {
+  transform: scale(1.1);
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 2.5rem;
-  right: 0;
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  z-index: 10;
-  min-width: 120px;
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: rgb(10, 77, 184);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.dropdown-menu a:hover {
-  background-color: #f8fafc;
-}
+/* Nav Menu Bar */
 .nav-center-bar {
+  position: sticky;
+  top: 70px; /* Adjust based on your header height */
+  z-index: 998;
   background-color: #f8f8f8;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 0.75rem 0;
+  transition: all 0.3s ease;
 }
 
 .nav-center {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .nav-center a {
   text-decoration: none;
-  color:rgb(10, 77, 184);
+  color: rgb(10, 77, 184);
   font-weight: 500;
+  font-size: 1.3rem;
   transition: color 0.3s;
 }
 
-/* .nav-center a:hover {
-  color: #007bff;
-} */
+.nav-center a:hover {
+  color: #083b8a;
+}
 
-
+/* Mobile Styles */
 @media (max-width: 768px) {
-  .main-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  .mobile-menu-btn {
+    display: block;
   }
 
-  .search-bar-container {
+  .nav-center-bar {
+    position: fixed;
+    top: 100px;
+    left: 0;
     width: 100%;
+    background: white;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    z-index: 100;
   }
 
-  .search-bar {
-    max-width: none;
+  .nav-center-bar.mobile-open {
+    max-height: 500px;
+    padding: 1rem 0;
+  }
+
+  .nav-center {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-center a {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  /* Adjust header height for mobile */
+  .main-header {
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Other responsive styles remain the same */
+@media (max-width: 1024px) {
+  .nav-center {
+    gap: 1.5rem;
+  }
+  .nav-center a {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-bar {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem;
+  }
+  
+  .top-bar-left,
+  .top-bar-center,
+  .top-bar-right {
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .search-bar input {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+  
+  .search-bar button {
+    padding: 0.6rem 1rem;
   }
 }

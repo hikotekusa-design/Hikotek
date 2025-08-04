@@ -1,144 +1,145 @@
 import React from 'react';
-// import HikotekLogo from '/Hikotek_Logo.png'
-import '../styles/Header.css';
-import '../styles/DistributorApply.css'
-
-
+import { motion } from 'framer-motion';
 
 const DistributorApply = () => {
-    const products = [
-        {
-            name: 'Vernier Caliper',
-            image: 'https://www.faithfulltools.com/images/full/FAICALVER.jpg',
-        },
-        {
-            name: 'Digital Torque Driver',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkmmhpHTq408nP2US0CqAitsA6RWHSKUb0A&s',
-        },
-        {
-            name: 'PB 8326 Set A1',
-            image: 'https://goodwill.in/pub/media/catalog/product/cache/affde3bad6fff216fce8dd9a3ef91de9/p/b/pb_8326.png',
-        },
-        {
-            name: 'Jetech Bits',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtv6_1kyROIOuD_FEkduwbdHy6yGD4ZauaA&s',
-        },
-        {
-            name: 'Mechanical External Micrometer',
-            image: 'https://bakergauges.com/wp-content/uploads/2015/08/prod-feat-micromet-mech-0-200-2b.jpg',
-        },
-    ];
-
     return (
-        <div className="min-h-screen bg-white text-gray-800 font-sans">
-            {/* <div className="logo-container p-4">
+        <div className="w-full bg-gradient-to-b from-gray-50 to-white font-sans text-gray-800">
+            {/* Banner Section */}
+            <div className="relative w-full h-[300px] md:h-[500px] overflow-hidden">
                 <img
-                    className="logo"
-                    src={HikotekLogo}
-                    alt="Hikotek Logo"
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+                    alt="Business Partnership"
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
                 />
-            </div> */}
-            {/* --- Product Scrolling Section --- */}
-            <section className="py-16 bg-white">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-blue-900 mb-4">Our Products</h2>
-                        <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-                        {/* <p className="mt-4 text-lg text-blue-800">High-quality tools trusted by professionals worldwide</p> */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-600/80 flex items-center justify-center">
+                    <motion.div
+                        className="text-center px-4"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow mb-4">
+                            Become a Distributor
+                        </h1>
+                        <p className="text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                            Join our global partner network and grow your business with our premium products.
+                        </p>
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* Application Process Section */}
+            <section className="px-4 md:px-6 py-20">
+                <div className="max-w-7xl mx-auto space-y-16">
+                    {/* Heading */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+                            Application Process
+                        </h2>
+                        <p className="text-gray-600 max-w-2xl text-lg leading-relaxed">
+                            We're looking for passionate partners to represent our brand. Complete our simple application process to get started.
+                        </p>
                     </div>
 
-                    <div className="relative overflow-hidden">
-                        <div className="flex animate-marquee whitespace-nowrap gap-8 py-4">
-                            {[...products, ...products].map((item, i) => (
-                                <div key={i} className="inline-flex flex-col items-center w-56 px-4 py-6 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-                                    <div className="w-40 h-40 mb-4 p-2 bg-white rounded-lg flex items-center justify-center">
-                                        <img
-                                            src={item.image}
-                                            alt={item.name}
-                                            className="max-h-full max-w-full object-contain"
-                                        />
+                    {/* Button + Steps */}
+                    <div className="flex flex-col lg:flex-row gap-12">
+                        {/* Apply Button */}
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            className="lg:w-1/4 flex flex-col items-start"
+                        >
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition duration-300 shadow-lg flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
+                                </svg>
+                                Apply now
+                            </button>
+                        </motion.div>
+
+                        {/* Steps */}
+                        <div className="lg:w-3/4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {[
+                                {
+                                    title: 'Online Application',
+                                    desc: 'Complete our simple online form with your company details and background.'
+                                },
+                                {
+                                    title: 'Discovery Call',
+                                    desc: 'Let’s discuss how we can work together to achieve mutual success.'
+                                },
+                                {
+                                    title: 'Final Approval',
+                                    desc: 'Welcome to our partner network! Let’s start this exciting journey together.'
+                                }
+                            ].map((step, idx) => (
+                                <motion.div
+                                    key={idx}
+                                    whileHover={{ scale: 1.03 }}
+                                    className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 hover:border-blue-200 transition relative overflow-hidden group"
+                                >
+                                    <div className="absolute -right-10 -top-10 w-28 h-28 bg-blue-100 rounded-full opacity-30 group-hover:opacity-50 transition" />
+                                    <div className="relative z-10">
+                                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-xl font-bold">
+                                            {idx + 1}
+                                        </div>
+                                        <h3 className="font-bold text-xl text-gray-900 mb-3">{step.title}</h3>
+                                        <p className="text-gray-600 leading-relaxed">{step.desc}</p>
                                     </div>
-                                    <p className="text-lg font-medium text-blue-900 text-center w-full truncate px-2">
-                                        {item.name.length > 25 ? `${item.name.substring(0, 22)}...` : item.name}
-                                    </p>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* --- Client Logos --- */}
-            <section className="py-16 bg-blue-50">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-blue-900 mb-4">Our Clients</h2>
-                        <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-                    </div>
-                    <div className="flex flex-wrap justify-center gap-12 px-4">
-                        {[1, 2, 3, 4, 5].map((client, i) => (
-                            <div key={i} className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition">
-                                <img
-                                    src={`https://via.placeholder.com/150x80?text=Client+${i + 1}`}
-                                    alt={`Client ${i + 1}`}
-                                    className="h-12 object-contain opacity-80 hover:opacity-100 transition"
-                                />
+            {/* Application Form */}
+            <section className="py-20 px-4 md:px-6 bg-white">
+                <div className="max-w-5xl mx-auto space-y-10">
+                    <h2 className="text-3xl font-extrabold text-gray-900 text-center">Distributor Application Form</h2>
+
+                    <div className="border border-gray-200 rounded-2xl shadow-xl p-8 bg-white">
+                        <form className="space-y-8">
+                            <div className="flex flex-col">
+                                <label htmlFor="company" className="font-medium text-gray-700 mb-2">Company *</label>
+                                <input type="text" id="company" required className="p-4 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* --- Distributor Form --- */}
-           
-
-           
-            {/* --- Testimonials --- */}
-            <section className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-6 lg:px-8">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-blue-900 mb-4">Client Success Stories</h2>
-                        <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-                        <p className="mt-4 text-lg text-blue-800 max-w-2xl mx-auto">
-                            Hear what our partners say about working with us
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-3 gap-10">
-                        {[
-                            {
-                                quote: "Hikotek's dedication to quality and service stands out. Their team is knowledgeable, responsive, and ensures specific needs are met.",
-
-                            },
-                            {
-                                quote: "Hikotek has exceeded expectations as a reliable partner for mechanical components. Their expertise in electromechanical assemblies is exceptional.",
-
-                            },
-                            {
-                                quote: "Hikotek provides a customer-centric experience with highly communicative teams. They provide fast turnaround times and tailored solutions.",
-
-                            }
-                        ].map((testimonial, i) => (
-                            <div key={i} className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100 relative">
-                                <div className="absolute -top-5 -left-5 w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                                    </svg>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="flex flex-col">
+                                    <label htmlFor="contactName" className="font-medium text-gray-700 mb-2">Contact Name *</label>
+                                    <input type="text" id="contactName" required className="p-4 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                                 </div>
-                                <p className="italic text-lg text-gray-700 mb-6">"{testimonial.quote}"</p>
-                                <div className="flex items-center">
-                                    {/* <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-                                        <span className="text-blue-800 font-bold">
-                                            {testimonial.author.split(' ').map(n => n[0]).join('')}
-                                        </span>
-                                    </div> */}
-                                    {/* <div>
-                                        <h4 className="font-semibold text-blue-900">{testimonial.author}</h4>
-                                        <p className="text-blue-600 text-sm">{testimonial.position}</p>
-                                    </div> */}
+                                <div className="flex flex-col">
+                                    <label htmlFor="title" className="font-medium text-gray-700 mb-2">Title</label>
+                                    <input type="text" id="title" className="p-4 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                                 </div>
                             </div>
-                        ))}
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="flex flex-col">
+                                    <label htmlFor="email" className="font-medium text-gray-700 mb-2">Email *</label>
+                                    <input type="email" id="email" required className="p-4 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label htmlFor="phone" className="font-medium text-gray-700 mb-2">Phone *</label>
+                                    <input type="tel" id="phone" required className="p-4 border border-gray-300 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col">
+                                <label htmlFor="channels" className="font-medium text-gray-700 mb-2">
+                                    What channels/markets do you currently (or anticipate selling) sell into? *
+                                </label>
+                                <textarea id="channels" required className="p-4 border border-gray-300 rounded-lg text-lg h-40 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+
+                            <div className="text-center pt-6">
+                                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg text-lg font-semibold transition">
+                                    Submit Application
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </section>

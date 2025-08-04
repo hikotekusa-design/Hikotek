@@ -43,7 +43,7 @@ const navigate = useNavigate();
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
-      <a className="text-blue-950 px-4 py-2" style={{color:" rgb(10, 77, 184)"}}>Products
+      <a className="text-blue-950 px-4 py-2" >Products
         <i class="fa-solid fa-caret-down"></i>
       </a>
 

@@ -5,19 +5,19 @@ import '../styles/SolutionsAndServices.css';
 const services = [
   {
     title: 'Technical Support',
-    icon: <FaToolbox size={32} />,
+    icon: <FaToolbox size={40} />, // Increased icon size
     image: 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/loBplKmolkSRjlrnomrliq/Magnetic-Measurement-Banner.png',
     description: 'Get expert help with equipment setup and maintenance.',
   },
   {
     title: 'Custom Solutions',
-    icon: <FaCogs size={32} />,
+    icon: <FaCogs size={40} />, // Increased icon size
     image: 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/lqBplKmolkSRmkmoljnkip/3.png',
     description: 'We design tailored solutions to meet your business needs.',
   },
   {
     title: 'Maintenance Plans',
-    icon: <FaWrench size={32} />,
+    icon: <FaWrench size={40} />, // Increased icon size
     image: 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/llBplKmolkSRjlrnokiqiq/huaban-1-da.png',
     description: 'Keep your systems running with regular checkups.',
   },

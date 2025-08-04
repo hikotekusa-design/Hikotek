@@ -1,95 +1,92 @@
-import React, { useState } from 'react';
-import GallerySlider from '../components/GallerySlider';
-
-const products = [
-  { name: 'Vernier Caliper', image: "https://www.faithfulltools.com/images/full/FAICALVER.jpg" },
-  { name: 'Digital Torque Driver', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnkmmhpHTq408nP2US0CqAitsA6RWHSKUb0A&s' },
-  { name: 'PB 8326 Set A1', image: 'https://goodwill.in/pub/media/catalog/product/cache/affde3bad6fff216fce8dd9a3ef91de9/p/b/pb_8326.png' },
-  { name: 'Jetech Bits', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtv6_1kyROIOuD_FEkduwbdHy6yGD4ZauaA&s' },
-  { name: 'Mechanical External Micrometer', image: 'https://bakergauges.com/wp-content/uploads/2015/08/prod-feat-micromet-mech-0-200-2b.jpg' },
-];
+import React from 'react';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from 'react-icons/fa';
 
 const Contact = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = () => setCurrentSlide((currentSlide + 1) % products.length);
-  const prevSlide = () => setCurrentSlide((currentSlide - 1 + products.length) % products.length);
-
   return (
-    <div className="min-h-screen bg-blue-950 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-white">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-gradient-to-br from-blue-50 to-white text-gray-900 min-h-screen font-sans">
+      {/* Heading with Animation */}
+      <div className="text-center py-14 px-4 animate-fadeIn">
+        <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-blue-800 mb-4 drop-shadow-sm">
+          Get in Touch
+        </h1>
+        <p className="text-lg text-gray-700 font-medium max-w-xl mx-auto">
+          Whether you have a question or just want to connect, our team is here for you.
+        </p>
+      </div>
 
-        {/* Header */}
-        <h1 className="text-6xl font-extrabold text-center mb-16 tracking-wide">Contact Us</h1>
+      {/* Map Section */}
+      <div className="w-full h-[450px] max-w-10xl mx-auto px-4 rounded-2xl overflow-hidden shadow-xl border border-blue-200 mb-14">
+        <iframe
+          title="World Map"
+          src="https://www.openstreetmap.org/export/embed.html"
+          className="w-full h-full"
+          loading="lazy"
+          style={{ filter: 'grayscale(20%) contrast(110%) brightness(95%)' }}
+        ></iframe>
+      </div>
 
-        {/* Gallery Slider */}
-        <div className="mb-20">
-          <div className="bg-white p-6 rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
-            <GallerySlider products={products} />
-          </div>
-        </div>
-
-        {/* Company Details */}
-        <div className="text-center mb-20">
-          <h2 className="text-5xl font-bold mb-4">Hikotek</h2>
-          <p className="text-xl leading-relaxed">HSR Layout<br />Bangalore, Karnataka, India</p>
-          <p className="text-xl mt-4">
-            Phone: <a href="tel:987654321" className="text-yellow-300 hover:underline">987654321</a> | 
-            Email: <a href="mailto:example@gmail.com" className="text-yellow-300 hover:underline">example@gmail.com</a>
-          </p>
-        </div>
-
-        {/* Two Column Layout */}
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Enquiry Form */}
-          <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-white/20">
-            <h3 className="text-4xl font-semibold mb-8">Send Your Enquiry</h3>
-            <div className="space-y-6">
-              <input 
-                type="text" 
-                placeholder="Your Name" 
-                className="w-full p-4 bg-white text-black rounded-lg placeholder-gray-500 focus:ring-2 focus:ring-yellow-400"
-              />
-              <input 
-                type="text" 
-                placeholder="Your Address" 
-                className="w-full p-4 bg-white text-black rounded-lg placeholder-gray-500 focus:ring-2 focus:ring-yellow-400"
-              />
-              <input 
-                type="tel" 
-                placeholder="Mobile Number" 
-                className="w-full p-4 bg-white text-black rounded-lg placeholder-gray-500 focus:ring-2 focus:ring-yellow-400"
-              />
-              <textarea 
-                placeholder="Your Message" 
-                rows="5" 
-                className="w-full p-4 bg-white text-black rounded-lg placeholder-gray-500 focus:ring-2 focus:ring-yellow-400"
-              />
-              <button 
-                type="button" 
-                className="w-full bg-yellow-400 text-black py-3 rounded-lg font-semibold hover:bg-yellow-500 transition"
-              >
-                Send Message
-              </button>
+      {/* Address Cards */}
+      <div className="px-4 md:px-8 lg:px-16 pb-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+        {/* Office Card Template */}
+        {offices.map((office, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 p-6 border border-gray-100"
+          >
+            <h3 className="text-xl font-bold text-blue-800 mb-4 border-b pb-2">
+              {office.title}
+            </h3>
+            <p className="text-gray-700 font-medium">{office.name}</p>
+            <p className="text-gray-600">{office.address}</p>
+            <div className="mt-4 space-y-1">
+              <p className="flex items-center text-blue-700">
+                <FaPhoneAlt className="mr-2" /> <span className="text-gray-800">{office.phone}</span>
+              </p>
+              <p className="flex items-center text-blue-700">
+                <FaEnvelope className="mr-2" /> <span className="text-gray-800">{office.email}</span>
+              </p>
             </div>
           </div>
-
-          {/* Google Map */}
-          <div className="rounded-2xl overflow-hidden shadow-2xl h-[500px] transform hover:scale-105 transition-transform duration-500">
-            <iframe
-              title="Company Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.654790644579!2d46.675295314426835!3d24.71355108410879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f04f6ae4e95bb%3A0x8fcda9cf69c019ae!2sRiyadh%2C%20Saudi%20Arabia!5e0!3m2!1sen!2sin!4v1616595405694!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              allowFullScreen=""
-              loading="lazy"
-              className="border-0 w-full h-full"
-            ></iframe>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
+
+// Office data
+const offices = [
+  {
+    title: 'Head Office',
+    name: 'Hikotek Instruments Pvt Ltd',
+    address: '#1234, Main Street, Bengaluru - 560001',
+    phone: '+91 98765 43210',
+    email: 'info@hikotek.com',
+  },
+  {
+    title: 'Middle East Office',
+    name: 'Hikotek ME LLC',
+    address: 'Al Qusais Industrial Area, Dubai, UAE',
+    phone: '+971 50 123 4567',
+    email: 'dubai@hikotek.com',
+  },
+  {
+    title: 'Support Office',
+    name: 'Hikotek Instruments',
+    address: 'Plot No. 45, Sector 22, Noida - 201301',
+    phone: '+91 99999 88888',
+    email: 'support@hikotek.com',
+  },
+];
+
+// Animation CSS
+const styles = `
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out;
+  }
+`;
 
 export default Contact;
