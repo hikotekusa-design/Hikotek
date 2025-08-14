@@ -29,7 +29,6 @@ const ChatBot = () => {
             <div className="bg-gray-100 p-2 rounded-lg w-fit max-w-[70%]">
               Hello! How can I help you today?
             </div>
-            {/* Add more sample messages if needed */}
           </div>
 
           {/* Input Box */}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductViewr from '../components/ProductViewr';
-import ProductDropdown from '../components/ProductDropdown';
 import '../styles/Home.css';
 import SolutionsAndServices from '../components/SolutionsAndServices';
 import Products from '../components/Products';
@@ -73,19 +72,9 @@ function Home() {
                 </div>
             </div>
 
-            {/* Welcome Section */}
-            <div className="welcome-section">
-                <h1>Welcome to Hikotek</h1>
-                <p>
-                    Welcome to Hikotek! It is a leading manufacturer and exporter of innovative security and visual
-                    management solutions. The company is dedicated to providing global customers with top-quality
-                    products and excellent service, backed by its commitment to research and development and stringent
-                    quality control processes. Explore the wide range of products and experience the Hikotek difference.
-                </p>
-            </div>
 
             {/* Product Viewer Section */}
-            <section style={{ backgroundColor: 'rgb(246, 246, 246)', padding: '2rem 0' }}>
+            <section  style={{ backgroundColor: 'rgb(246, 246, 246)', padding: '3rem 0' }}>
                 <h2 className="text-5xl font-bold text-center mb-8 text-gray-800">Featured Products</h2>
                 <ProductViewr />
             </section>
@@ -107,7 +96,7 @@ function Home() {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="info-card center-card">
+                    <div className="info-card">
                         <img src="https://www.flir.eu/globalassets/industrial/teaser-blocks/teaser-industrial-2.jpg" alt="Work" />
                         <div className="info-card-content">
                             <h4>FOR YOUR WORK</h4>

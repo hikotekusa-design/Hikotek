@@ -1,12 +1,12 @@
 .solutions-section {
-  padding: 3rem 1rem; /* Increased padding */
+  padding: 3rem 1rem; 
   background: #f9f9f9;
   text-align: center;
 }
 
 .solutions-title {
-  font-size: 2.5rem; /* Increased font size */
-  margin-bottom: 2rem; /* Increased margin */
+  font-size: 2.5rem; 
+  margin-bottom: 2rem;
   font-weight: bold;
 }
 
@@ -14,8 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 30px; /* Increased gap */
-  max-width: 1400px; /* Increased max-width */
+  gap: 30px;
+  max-width: 1400px;
   margin: 0 auto;
   overflow: hidden;
   flex-wrap: nowrap;
@@ -24,11 +24,11 @@
 .solution-card {
   position: relative;
   flex: 1 1 0;
-  height: 450px; /* Increased height */
+  height: 450px; 
   background-color: #eee;
   overflow: hidden;
   transition: all 0.4s ease;
-  border-radius: 15px; /* Increased border radius */
+  border-radius: 15px; 
   cursor: pointer;
   min-width: 0;
 }
@@ -43,7 +43,7 @@
 .solution-card.active {
   flex: 1.5;
   z-index: 2;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Enhanced shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); 
 }
 
 .service-info {
@@ -58,27 +58,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem; /* Increased padding */
+  padding: 2rem;
   text-align: center;
 }
 
 .service-icon {
-  margin-bottom: 1rem; /* Increased margin */
+  margin-bottom: 1rem;
 }
 
 .service-info h4 {
-  font-size: 1.5rem; /* Increased font size */
+  font-size: 1.5rem; 
   font-weight: bold;
-  margin-bottom: 1rem; /* Increased margin */
+  margin-bottom: 1rem; 
 }
 
 .service-info p {
-  font-size: 1.1rem; /* Increased font size */
+  font-size: 1.1rem;
   line-height: 1.6;
-  max-width: 80%; /* Added max-width for better readability */
+  max-width: 80%;
 }
 
-/* Responsive adjustments */
 @media (max-width: 992px) {
   .solutions-container {
     flex-wrap: wrap;

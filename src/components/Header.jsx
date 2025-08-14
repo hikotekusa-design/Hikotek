@@ -26,58 +26,58 @@ function Header() {
       {/* Top Bar */}
       <div className="top-bar">
         <div className="top-bar-left">
-          <span><i className="fas fa-phone-alt"></i> +91 12345 67890</span>
-        </div>
-        <div className="top-bar-center">
-          <span><i className="fas fa-envelope"></i> info@hikotek.com</span>
+          <span>Need help? Email us : info@hikotek.com</span>
         </div>
         <div className="top-bar-right">
           <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
         </div>
       </div>
 
       {/* Main Header */}
-      <nav className="main-header">
-        <div className="nav-left">
-          <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-          </button>
-          <a href="/">
-            <img src={HikotekLogo} alt="Hikotek Logo" className="logo" />
-          </a>
-        </div>
-
-        <div className="search-bar-container">
-          <div className="search-bar">
-            <input type="text" placeholder="Search products" aria-label="Search" />
-            <button type="button">
-              <i className="fa-solid fa-magnifying-glass"></i>
+      <header className="header-container">
+        <nav className="main-header">
+          <div className="nav-left">
+            <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
             </button>
+            <a href="/">
+              <img src={HikotekLogo} alt="Hikotek Logo" className="logo" />
+            </a>
+          </div>
+
+          <div className="search-bar-container">
+            <div className="search-bar">
+              <input type="text" placeholder="Search products" aria-label="Search" />
+              <button type="button">
+                <i className="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+
+          <div className="nav-right">
+            <div className="globe-dropdown">
+              <i className="fas fa-globe" onClick={toggleGlobeDropdown}></i>
+            </div>
+          </div>
+        </nav>
+
+        {/* Nav Menu Bar */}
+        <div className={`nav-center-bar ${isMenuOpen ? 'mobile-open' : ''}`}>
+          <div className="nav-center">
+            <a href="/" onClick={toggleMobileMenu}>Home</a>
+            <a href="/about" onClick={toggleMobileMenu}>About Us</a>
+            {isMobile ? (
+              <a href="/moreproducts" onClick={handleProductsClick}>Products</a>
+            ) : (
+              <ProductDropdown />
+            )}
+            <a href="/contact" onClick={toggleMobileMenu}>Contact Us</a>
+            <a href="/distributor" onClick={toggleMobileMenu}>Distributor Apply</a>
           </div>
         </div>
-
-        <div className="nav-right">
-          <div className="globe-dropdown">
-            <i className="fas fa-globe" onClick={toggleGlobeDropdown}></i>
-          </div>
-        </div>
-      </nav>
-
-      {/* Nav Menu Bar */}
-      <div className={`nav-center-bar ${isMenuOpen ? 'mobile-open' : ''}`}>
-        <div className="nav-center">
-          <a href="/" onClick={toggleMobileMenu}>Home</a>
-          <a href="/about" onClick={toggleMobileMenu}>About Us</a>
-          {isMobile ? (
-            <a href="/moreproducts" onClick={handleProductsClick}>Products</a>
-          ) : (
-            <ProductDropdown />
-          )}
-          <a href="/contact" onClick={toggleMobileMenu}>Contact Us</a>
-          <a href="/distributor" onClick={toggleMobileMenu}>Distributor Apply</a>
-        </div>
-      </div>
+      </header>
 
       {/* Modal for Globe */}
       <GlobeMap 

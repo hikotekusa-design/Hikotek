@@ -22,7 +22,7 @@ const About = () => {
       {/* Centered Logo Section Below Banner */}
       <section className="bg-white flex flex-col items-center py-10 text-center">
         <img
-          src={HikotekLogo} // Replace with actual logo URL or path
+          src={HikotekLogo} 
           alt="Hikotek Logo"
           className="h-24 sm:h-28 object-contain drop-shadow-md mb-4"
         />
@@ -55,7 +55,7 @@ const About = () => {
               </p>
             </div>
 
-            {/* Right: Full-height image */}
+            {/* Right */}
             <div className="md:w-1/2 h-[300px] md:h-auto">
               <img
                 src="https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/ljBplKmolkSRjlnlninriq/gongsidalouxinwaiguantu.png"
@@ -70,7 +70,7 @@ const About = () => {
       <section className="bg-white px-4 sm:px-8 pt-12 pb-60">
         <div className="max-w-7xl mx-auto relative overflow-visible bg-white shadow-xl">
           <div className="flex flex-col md:flex-row">
-            {/* Left: Image */}
+            {/* Left*/}
             <div className="relative md:w-1/2 w-full h-[500px]">
               <img
                 src="https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/ljBplKmolkSRjlnlninriq/gongsidalouxinwaiguantu.png"
@@ -86,7 +86,7 @@ const About = () => {
               </div>
             </div>
 
-            {/* Right: Text */}
+            {/* Right */}
             <div className="md:w-1/2 w-full p-3 md:p-10 flex flex-col justify-center">
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
                 HIKOTEK Company Profile

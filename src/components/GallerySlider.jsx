@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Home.css'; // Keep styles if you're reusing them
+import '../styles/Home.css'; 
 
 const GallerySlider = ({ products }) => {
   const [currentSlide, setCurrentSlide] = useState(0);

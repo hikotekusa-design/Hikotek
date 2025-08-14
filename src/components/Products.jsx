@@ -54,24 +54,19 @@ const ProductCard = ({ product }) => (
       {/* Image */}
       <img src={product.image} alt={product.title} className="h-48 mx-auto object-contain" />
 
-      {/* Stars */}
-      <div className="flex justify-center mt-3">
-        {Array(5).fill().map((_, idx) => (
-          <span key={idx} className="text-yellow-400">&#9733;</span>
-        ))}
-      </div>
+      
 
       {/* Brand */}
-      <div className="text-center text-sm mt-1 text-gray-500">{product.brand}</div>
+      <div className="text-center text-2xl text-black mt-1 ">{product.brand}</div>
 
       {/* Title */}
-      <div className="text-center font-medium text-sm mt-1 px-1 line-clamp-2">{product.title}</div>
+      <div className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">{product.title}</div>
 
       {/* Button & Price */}
       <div className="mt-3 text-center">
-        <button className="bg-blue-900 text-white px-4 py-1 rounded-full text-sm flex items-center gap-2 mx-auto">
+        {/* <button className="bg-blue-900 text-white px-4 py-1 rounded-full text-sm flex items-center gap-2 mx-auto">
           Enquiry Now
-        </button>
+        </button> */}
         <div className="mt-2 font-bold text-blue-900">{product.price}</div>
       </div>
     </div>

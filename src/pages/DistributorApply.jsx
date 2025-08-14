@@ -42,7 +42,7 @@ const DistributorApply = () => {
                         </p>
                     </div>
 
-                    {/* Button + Steps */}
+                    {/* Button +Steps */}
                     <div className="flex flex-col lg:flex-row gap-12">
                         {/* Apply Button */}
                         <motion.div

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaStar, FaFileDownload } from 'react-icons/fa';
-import EnquiryForm from '../components/EnquiryForm'; // Make sure the path is correct
+import EnquiryForm from '../components/EnquiryForm';
 
 const ProductPage = () => {
   const [activeTab, setActiveTab] = useState('description');
@@ -8,11 +8,11 @@ const ProductPage = () => {
   const [zoomStyle, setZoomStyle] = useState({});
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
 
-    useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const tabs = ['description', 'downloads', 'reviews'];
+  const tabs = ['description', 'downloads'];
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -63,65 +63,20 @@ const ProductPage = () => {
             </button>
           </div>
         );
-      case 'reviews':
-        return (
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">Customer Feedback</h3>
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-6">
-              <div className="text-center">
-                <div className="text-5xl font-bold">0</div>
-                <div className="text-yellow-500 flex justify-center mt-2">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} size={24} />
-                  ))}
-                </div>
-                <div className="text-base text-gray-500 mt-2">0 Verified ratings</div>
-              </div>
-              <div className="flex-1 space-y-2 w-full">
-                {[5, 4, 3, 2, 1].map((star) => (
-                  <div key={star} className="flex items-center gap-4">
-                    <div className="w-full bg-gray-200 h-3 rounded">
-                      <div className="bg-yellow-400 h-3 rounded" style={{ width: `0%` }} />
-                    </div>
-                    <div className="flex text-yellow-500">
-                      {[...Array(star)].map((_, i) => (
-                        <FaStar key={i} size={14} />
-                      ))}
-                    </div>
-                    <div className="text-base text-gray-600">0%</div>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="flex justify-center gap-4 mt-6">
-              {[5, 4, 3, 2, 1].map((star) => (
-                <button
-                  key={star}
-                  className="flex items-center gap-1 bg-gray-100 hover:bg-blue-100 text-gray-800 border border-gray-300 px-4 py-2 rounded transition"
-                >
-                  {[...Array(star)].map((_, i) => (
-                    <FaStar key={i} size={16} className="text-yellow-500" />
-                  ))}
-                </button>
-              ))}
-            </div>
-
-            <div className="text-center text-gray-600 mt-8 text-lg">No review found.</div>
-          </div>
-        );
-      default:
-        return null;
     }
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-white p-6 sm:p-10">
-      {showEnquiryModal && (
-        <EnquiryForm onClose={toggleEnquiryModal} />
-      )}
-      
-      <div className="max-w-[1400px] mx-auto w-full">
+    <>
+   {showEnquiryModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-[1000] flex items-center justify-center p-4">
+    <EnquiryForm onClose={toggleEnquiryModal} className="relative z-[1001] w-full max-w-2xl" />
+  </div>
+)}
+
+
+      <div className="max-w-[1400px] mx-auto w-full mt-4">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Thumbnails and Main Image */}
           <div className="flex gap-4">
@@ -134,9 +89,8 @@ const ProductPage = () => {
                   key={idx}
                   src={img}
                   alt={`Thumbnail ${idx + 1}`}
-                  className={`w-20 h-20 object-contain rounded-lg cursor-pointer border ${
-                    selectedImage === img ? 'border-blue-500' : 'border-gray-300'
-                  }`}
+                  className={`w-20 h-20 object-contain rounded-lg cursor-pointer border ${selectedImage === img ? 'border-blue-500' : 'border-gray-300'
+                    }`}
                   onClick={() => setSelectedImage(img)}
                 />
               ))}
@@ -166,7 +120,7 @@ const ProductPage = () => {
             <p className="text-gray-600 text-lg"><strong>Warranty:</strong> 1 Year</p>
             <p className="text-green-600 font-medium mt-4 text-xl">In Stock</p>
             <p className="text-blue-600 font-bold text-2xl mt-6">Price: 795.00 SAR (Including VAT)</p>
-            <button 
+            <button
               onClick={toggleEnquiryModal}
               className="bg-blue-700 text-white mt-6 px-8 py-3 rounded-lg text-lg hover:bg-blue-800 transition"
             >
@@ -197,7 +151,7 @@ const ProductPage = () => {
           {renderContent()}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
