@@ -1,37 +1,58 @@
 import { useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
-import ProductViewer from './pages/ProductPage'
 import ProductPage from './pages/ProductPage'
 import Contact from './pages/Contact'
 import DistributorApply from './pages/DistributorApply'
-import Header from './components/Header'
-import Footer from './components/Footer'
 import MoreProdutsPg from './pages/MoreProdutsPg'
 import ChatBot from './components/ChatBot'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Auth from './pages/Admin/Auth'
+import AdminDash from './pages/Admin/AdminDash'
+import AdminProducts from './pages/Admin/AdminProducts'
+import AddProducts from './pages/Admin/AddProducts'
+import AdminEnquiries from './pages/Admin/AdminEnquiries'
+import AdminDistributors from './pages/Admin/AdminDistributors'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation()
+  
+  // Pages where you DON'T want Header & Footer
+  const hideHeaderFooter = ['/admin/login','/admin/dashboard','/admin/products','/admin/products/add','/admin/enquiries','/admin/distributors']
+
+  const shouldHide = hideHeaderFooter.includes(location.pathname)
 
   return (
     <>
-    <Header/>
-    <Routes>
-      <Route path='/' element={<Home/>}></Route>
-      <Route path='/about' element={<About/>} ></Route>
-      <Route path='/products' element={<ProductPage/>} ></Route>
-      <Route path='/contact' element={<Contact/>}></Route>
-      <Route path='/distributor' element={<DistributorApply/>}></Route>
-      <Route path='/moreproducts' element={<MoreProdutsPg/>}></Route>
-
-
-    </Routes>
-    <ChatBot/>
-    <Footer/>
+      {!shouldHide && <Header />}
       
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/products' element={<ProductPage />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/distributor' element={<DistributorApply />} />
+        <Route path='/moreproducts' element={<MoreProdutsPg />} />
+        <Route path='/admin/login' element={<Auth />} />
+        <Route path='/admin/dashboard' element={<AdminDash />} />
+        {/* <Route path='/admin/dashboard' element={<AdminDash />} /> */}
+        <Route path='/admin/products' element={<AdminProducts />} />
+        <Route path='/admin/products/add' element={<AddProducts />} />
+        <Route path='/admin/enquiries' element={<AdminEnquiries />} />
+        <Route path='/admin/distributors' element={<AdminDistributors/>}/>
+
+
+
+
+
+      </Routes>
+
+      {!shouldHide && <ChatBot />}
+      {!shouldHide && <Footer />}
     </>
   )
 }
