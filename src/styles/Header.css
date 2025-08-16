@@ -87,28 +87,29 @@
   border: 1px solid rgb(10, 77, 184);
   border-radius: 9999px;
   overflow: hidden;
-  max-width: 400px;
-  width: 100%;
+  max-width: 400px; /* Keep same width */
+  width: 70%; /* Keep same width */
+  height: 40px; /* Add height control */
 }
 
 .search-bar input {
   flex: 1;
-  padding: 0.5rem 0.75rem;
+  padding: 0.35rem 0.75rem;
   border: none;
   outline: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem; 
 }
 
 .search-bar button {
-  padding: 0.5rem 1rem;
+  padding: 0 1rem; 
   background-color: rgb(10, 77, 184);
   color: white;
   font-weight: bold;
   border: none;
   cursor: pointer;
   transition: background 0.3s ease;
+  font-size: 0.9rem; 
 }
-
 .search-bar button:hover {
   background-color: #0f172a;
 }

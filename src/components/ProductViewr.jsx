@@ -14,13 +14,21 @@ function ProductViewer() {
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [direction, setDirection] = useState(1);
 
     const handlePrev = () => {
+        setDirection(-1);
         setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length);
     };
 
     const handleNext = () => {
+        setDirection(1);
         setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
+    };
+
+    const handleCardClick = (index) => {
+        if (index === 0) handlePrev();
+        else if (index === 2) handleNext();
     };
 
     const getVisibleProducts = () => {
@@ -31,6 +39,30 @@ function ProductViewer() {
 
     const visibleProducts = getVisibleProducts();
 
+    const cardVariants = {
+        left: {
+            scale: 0.6,
+            x: 0,     
+            opacity: 0.9, 
+            zIndex: 1,
+            transition: { duration: 0.5 }
+        },
+        center: {
+            scale: 1.2,
+            x: 0,
+            opacity: 1,
+            zIndex: 2,
+            transition: { duration: 0.5 }
+        },
+        right: {
+            scale: 0.6,  
+            x: 0,       
+            opacity: 0.9, 
+            zIndex: 1,
+            transition: { duration: 0.5 }
+        }
+    };
+
     return (
         <div className="product-viewer">
             <button className="nav-button prev" onClick={handlePrev}>
@@ -40,56 +72,49 @@ function ProductViewer() {
             </button>
 
             <div className="product-slider">
-                <div className="slider-track static-layout">
+                <div className="slider-track static-layout" style={{ gap: '15px' }}> 
                     {visibleProducts.map((product, index) => (
                         <motion.div
                             key={index}
-                            className="product-item"
-                            initial={{ opacity: 0 }}
-                            animate={{
-                                scale: index === 1 ? 1.2 : 0.9,
-                                opacity: 1,
+                            className={`product-item ${index !== 1 ? 'clickable-card' : ''}`}
+                            variants={cardVariants}
+                            initial={index === 0 ? "left" : index === 2 ? "right" : "center"}
+                            animate={index === 0 ? "left" : index === 2 ? "right" : "center"}
+                            onClick={() => handleCardClick(index)}
+                            style={{
+                                flex: index === 1 ? '0 0 40%' : '0 0 30%' 
                             }}
-                            transition={{ duration: 0.7, ease: "easeInOut" }}
                         >
                             <motion.img
                                 src={product.image}
                                 alt={product.name}
-                                initial={{ opacity: 0 }}
                                 animate={{
-                                    scale: index === 1 ? 1.1 : 0.95,
-                                    opacity: 1,
+                                    scale: index === 1 ? 1.1 : 0.95
                                 }}
-                                transition={{ duration: 0.7, ease: "easeInOut" }}
                             />
-                            <motion.p
+                            <motion.p 
                                 className="product-name"
                                 animate={{
-                                    scale: index === 1 ? 1.2 : 1,
-                                    fontSize: index === 1 ? "1.5rem" : "1rem",
-                                    opacity: index === 1 ? 1 : 0.7,
+                                    fontSize: index === 1 ? "1.5rem" : "1.1rem", 
+                                    opacity: index === 1 ? 1 : 0.8
                                 }}
-                                transition={{ duration: 0.7, ease: "easeInOut" }}
                             >
                                 {product.name}
                             </motion.p>
                             
                             {index === 1 && (
                                 <>
-                                    <motion.p
-                                        className="product-description"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ duration: 0.7, ease: "easeInOut" }}
-                                    >
+                                    <motion.p className="product-description">
                                         {product.description}
                                     </motion.p>
                                     <motion.button
                                         className="view-product-button"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.7, ease: "easeInOut" }}
-                                        onClick={() => nav('/products')}
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            nav('/products');
+                                        }}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
                                     >
                                         View Product
                                     </motion.button>

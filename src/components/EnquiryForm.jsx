@@ -61,7 +61,7 @@ const EnquiryForm = ({ onClose }) => {
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-white p-6 sm:p-8 rounded-lg w-full max-w-2xl relative shadow-xl overflow-y-auto max-h-[90vh] mx-4">
+      <div className="bg-white p-6 sm:p-8 rounded-lg w-full max-w-2xl relative shadow-xl overflow-y-auto max-h-[100vh] mx-4">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl transition"
