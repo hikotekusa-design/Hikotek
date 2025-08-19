@@ -8,42 +8,42 @@ const products = [
     brand: "Mitutoyo",
     title: "Mitutoyo 293-243-30 Digimatic Micrometer, Range 75",
     image: "https://caltecharab.com/public/uploads/images/03-05-2025/68164f63503fc.webp",
-    price: "SAR 1,140.00"
+    price: "USD 1,140.00"
   },
   {
     id: 2,
     brand: "Mitutoyo",
     title: "Mitutoyo 293-250-30 Coolant Proof Digital Micrometer",
     image: "https://caltecharab.com/public/uploads/images/03-05-2025/681654793e931.webp",
-    price: "SAR 2,340.00"
+    price: "USD 2,340.00"
   },
   {
     id: 3,
     brand: "Mitutoyo",
     title: "Mitutoyo 293-251-30 Coolant Proof Micrometer Range",
     image: "https://caltecharab.com/public/uploads/images/03-05-2025/68165b1fdd921.jpeg",
-    price: "SAR 2,385.00"
+    price: "USD 2,385.00"
   },
   {
     id: 4,
     brand: "Mitutoyo",
     title: "Mitutoyo 293-252-30 Digital Coolant Proof Micromet",
     image: "https://caltecharab.com/public/uploads/images/04-05-2025/68173a0972d2b.jpeg",
-    price: "SAR 2,325.00"
+    price: "USD 2,325.00"
   },
   {
     id: 5,
     brand: "Other Brand",
     title: "TempU08 Single Use Temperature Data Logger Range",
     image: "https://caltecharab.com/public/uploads/images/03-05-2025/68165e0171aad.webp",
-    price: "SAR 65.00"
+    price: "USD 65.00"
   },
   {
     id: 6,
     brand: "Other Brand",
     title: "TempU08 Single Use Temperature Data Logger Range",
     image: "https://caltecharab.com/public/uploads/images/04-05-2025/68173a0972d2b.jpeg",
-    price: "SAR 65.00"
+    price: "USD 65.00"
   },
 ];
 

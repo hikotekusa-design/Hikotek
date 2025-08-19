@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { FaStar, FaFileDownload } from 'react-icons/fa';
+import { FaFileDownload } from 'react-icons/fa';
 import EnquiryForm from '../components/EnquiryForm';
 
 const ProductPage = () => {
   const [activeTab, setActiveTab] = useState('description');
-  const [selectedImage, setSelectedImage] = useState('https://www.faithfulltools.com/images/full/FAICALVER.jpg');
-  const [zoomStyle, setZoomStyle] = useState({});
+  const [selectedImage, setSelectedImage] = useState(
+    'https://static.vecteezy.com/system/resources/thumbnails/008/535/268/small_2x/calliper-isolated-over-white-png.png'
+  );
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
 
   useEffect(() => {
@@ -13,23 +14,6 @@ const ProductPage = () => {
   }, []);
 
   const tabs = ['description', 'downloads'];
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setZoomStyle({
-      transformOrigin: `${x}% ${y}%`,
-      transform: 'scale(1.5)',
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setZoomStyle({
-      transform: 'scale(1)',
-      transformOrigin: 'center center',
-    });
-  };
 
   const toggleEnquiryModal = () => {
     setShowEnquiryModal(!showEnquiryModal);
@@ -41,7 +25,9 @@ const ProductPage = () => {
         return (
           <div className="text-gray-700 leading-relaxed">
             <p className="mb-4 text-lg">
-              Mitutoyo offers a complete selection of Bore Gauges. The 511 series bore gauges come standard with interchangeable anvils and necessary accessories to perform close tolerance ID measurements.
+              Mitutoyo offers a complete selection of Bore Gauges. The 511 series bore gauges come
+              standard with interchangeable anvils and necessary accessories to perform close
+              tolerance ID measurements.
             </p>
             <p className="font-semibold text-orange-600 mt-6 text-xl">SPECIFICATIONS</p>
             <ul className="list-disc ml-8">
@@ -63,66 +49,78 @@ const ProductPage = () => {
             </button>
           </div>
         );
-
+      default:
+        return null;
     }
   };
 
   return (
-    <>
-   {showEnquiryModal && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 z-[1000] flex items-center justify-center p-4">
-    <EnquiryForm onClose={toggleEnquiryModal} className="relative z-[1001] w-full max-w-2xl" />
-  </div>
-)}
+    <div className="min-h-screen bg-[#f6f6f6]">
+      {showEnquiryModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[1000] flex items-center justify-center p-4">
+          <EnquiryForm
+            onClose={toggleEnquiryModal}
+            className="relative z-[1001] w-full max-w-2xl"
+          />
+        </div>
+      )}
 
-
-      <div className="max-w-[1400px] mx-auto w-full mt-4">
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Thumbnails and Main Image */}
-          <div className="flex gap-4">
-            <div className="flex flex-col gap-4">
+      <div className="mx-auto w-full pt-4 pb-12 px-4">
+        <div className="grid md:grid-cols-2 gap-12 bg-[#f6f6f6] p-6 rounded-lg">
+          <div className="flex">
+            <div className="flex flex-col gap-3 mr-3">
               {[
-                'https://www.faithfulltools.com/images/full/FAICALVER.jpg',
-                'https://goodwill.in/pub/media/catalog/product/cache/affde3bad6fff216fce8dd9a3ef91de9/p/b/pb_8326.png'
+                'https://static.vecteezy.com/system/resources/thumbnails/008/535/268/small_2x/calliper-isolated-over-white-png.png',
+                'https://goodwill.in/pub/media/catalog/product/cache/affde3bad6fff216fce8dd9a3ef91de9/p/b/pb_8326.png',
               ].map((img, idx) => (
-                <img
+                <div
                   key={idx}
-                  src={img}
-                  alt={`Thumbnail ${idx + 1}`}
-                  className={`w-20 h-20 object-contain rounded-lg cursor-pointer border ${selectedImage === img ? 'border-blue-500' : 'border-gray-300'
+                  className={`w-16 h-16 rounded-md cursor-pointer overflow-hidden transition-all duration-300 ${selectedImage === img
+                      ? ''
+                      : 'opacity-70 hover:opacity-100'
                     }`}
                   onClick={() => setSelectedImage(img)}
-                />
+                >
+                  <img
+                    src={img}
+                    alt={`Thumbnail ${idx + 1}`}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
               ))}
             </div>
 
-            {/* Zoom Image */}
-            <div
-              className="overflow-hidden w-full max-h-[500px] rounded-lg shadow-lg"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            >
+            {/* Main Image */}
+            <div className="flex-1 overflow-hidden max-h-[400px] rounded-lg flex items-center justify-center">
               <img
                 src={selectedImage}
                 alt="Product"
-                className="w-full h-full object-contain transition-transform duration-300"
-                style={zoomStyle}
+                className="w-85 h-full object-contain"
               />
             </div>
           </div>
 
-          {/* Product Info */}
-          <div>
-            <h2 className="text-3xl font-semibold mb-4">Mitutoyo 511-711 Standard Dial Bore Gauge</h2>
-            <p className="text-gray-600 text-lg"><strong>Brand:</strong> Mitutoyo</p>
-            <p className="text-gray-600 text-lg"><strong>Model No:</strong> 511-711</p>
-            <p className="text-gray-600 text-lg"><strong>Range:</strong> 18–35mm</p>
-            <p className="text-gray-600 text-lg"><strong>Warranty:</strong> 1 Year</p>
-            <p className="text-green-600 font-medium mt-4 text-xl">In Stock</p>
-            <p className="text-blue-600 font-bold text-2xl mt-6">Price: 795.00 SAR (Including VAT)</p>
+          {/* Right Side: Product Info */}
+          <div className="bg-[#f6f6f6]">
+            <h2 className="text-3xl mb-4">
+              Mitutoyo 511-711 Standard Dial Bore Gauge
+            </h2>
+
+            <ul className="list-disc ml-5 space-y-2 mb-6">
+              <li className="text-gray-700">Premium quality construction</li>
+              <li className="text-gray-700">High precision measurements</li>
+              <li className="text-gray-700">Includes all necessary accessories</li>
+              <li className="text-gray-700">Easy-to-read dial display</li>
+              <li className="text-gray-700">Durable and long-lasting</li>
+            </ul>
+
+            <p className="text-black font-bold text-2xl mt-6">
+              Price: $212.00 USD
+            </p>
+
             <button
               onClick={toggleEnquiryModal}
-              className="bg-blue-700 text-white mt-6 px-8 py-3 rounded-lg text-lg hover:bg-blue-800 transition"
+              className="mt-6 px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-lg"
             >
               Enquire Now
             </button>
@@ -130,13 +128,16 @@ const ProductPage = () => {
         </div>
 
         {/* Tabs */}
-        <div className="flex justify-center mt-12 mb-8 flex-wrap gap-4 border-b border-gray-300">
+        <div className="flex justify-center mt-12 mb-8 flex-wrap gap-4 border-b border-gray-300 bg-[#f6f6f6]">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-6 py-3 capitalize text-lg font-medium transition duration-200 relative
-                ${activeTab === tab ? 'text-blue-600 font-semibold' : 'text-gray-500 hover:text-blue-500'}`}
+                ${activeTab === tab
+                  ? 'text-blue-600 font-semibold'
+                  : 'text-gray-500 hover:text-blue-500'
+                }`}
             >
               {tab}
               {activeTab === tab && (
@@ -147,11 +148,9 @@ const ProductPage = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-gray-50 p-8 rounded-lg shadow-lg">
-          {renderContent()}
-        </div>
+        <div className="bg-[#f6f6f6] p-8 rounded-lg">{renderContent()}</div>
       </div>
-    </>
+    </div>
   );
 };
 

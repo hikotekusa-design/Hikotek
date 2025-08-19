@@ -7,7 +7,7 @@
 .solutions-title {
   font-size: 2.5rem; 
   margin-bottom: 2rem;
-  font-weight: bold;
+  color: #333;
 }
 
 .solutions-container {
@@ -31,6 +31,12 @@
   border-radius: 15px; 
   cursor: pointer;
   min-width: 0;
+  transform-origin: center;
+  margin-right: 30px; /* Initial gap */
+}
+
+.solution-card:last-child {
+  margin-right: 0; /* Remove gap from last card */
 }
 
 .solution-card img {
@@ -43,7 +49,17 @@
 .solution-card.active {
   flex: 1.5;
   z-index: 2;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
+  margin-right: 60px; /* Double the gap when expanded */
+}
+
+.solution-card.active:hover {
+  transform: scale(1.07);
+}
+
+.solution-card.active + .solution-card {
+  margin-left: -30px; /* Pull next card closer to compensate */
 }
 
 .service-info {
@@ -60,36 +76,53 @@
   align-items: center;
   padding: 2rem;
   text-align: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.solution-card.active .service-info {
+  opacity: 1;
 }
 
 .service-icon {
   margin-bottom: 1rem;
+  color: #fff;
 }
 
 .service-info h4 {
   font-size: 1.5rem; 
   font-weight: bold;
   margin-bottom: 1rem; 
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .service-info p {
   font-size: 1.1rem;
   line-height: 1.6;
   max-width: 80%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 992px) {
   .solutions-container {
     flex-wrap: wrap;
+    gap: 20px;
   }
   
   .solution-card {
     flex: 1 1 300px;
     height: 350px;
+    margin-right: 0 !important;
   }
   
   .solution-card.active {
     flex: 1 1 300px;
+    transform: none;
+    margin-right: 0 !important;
+  }
+
+  .solution-card.active + .solution-card {
+    margin-left: 0 !important;
   }
 }
 
@@ -100,5 +133,13 @@
   
   .solution-card {
     height: 300px;
+  }
+  
+  .service-info h4 {
+    font-size: 1.3rem;
+  }
+  
+  .service-info p {
+    font-size: 1rem;
   }
 }

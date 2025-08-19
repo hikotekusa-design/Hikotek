@@ -66,15 +66,25 @@ function Header() {
         {/* Nav Menu Bar */}
         <div className={`nav-center-bar ${isMenuOpen ? 'mobile-open' : ''}`}>
           <div className="nav-center">
-            <a href="/" onClick={toggleMobileMenu}>Home</a>
-            <a href="/about" onClick={toggleMobileMenu}>About Us</a>
-            {isMobile ? (
-              <a href="/moreproducts" onClick={handleProductsClick}>Products</a>
-            ) : (
-              <ProductDropdown />
-            )}
-            <a href="/contact" onClick={toggleMobileMenu}>Contact Us</a>
-            <a href="/distributor" onClick={toggleMobileMenu}>Distributor Apply</a>
+            <div className="nav-item">
+              <a href="/" onClick={toggleMobileMenu}>Home</a>
+            </div>
+            <div className="nav-item">
+              {isMobile ? (
+                <a href="/moreproducts" onClick={handleProductsClick}>Products</a>
+              ) : (
+                <ProductDropdown />
+              )}
+            </div>
+            <div className="nav-item">
+              <a href="/distributor" onClick={toggleMobileMenu}>Distributor Apply</a>
+            </div>
+            <div className="nav-item gap-2">
+              <a href="/about" onClick={toggleMobileMenu}>About Us</a>
+            </div>
+            <div className="nav-item">
+              <a href="/contact" onClick={toggleMobileMenu}>Contact Us</a>
+            </div>
           </div>
         </div>
       </header>

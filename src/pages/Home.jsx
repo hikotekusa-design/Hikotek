@@ -75,7 +75,7 @@ function Home() {
 
             {/* Product Viewer Section */}
             <section  style={{ backgroundColor: 'rgb(246, 246, 246)', padding: '3rem 0' }}>
-                <h2 className="text-5xl font-bold text-center mb-8 text-gray-800">Featured Products</h2>
+                <h2 className="text-5xl  text-center mb-8 text-gray-800">Featured Products</h2>
                 <ProductViewr />
             </section>
 
@@ -130,7 +130,7 @@ function Home() {
 
             {/* Products and Load More Button */}
             <section className="contact-section">
-                <h1 className="text-5xl font-semibold mb-6">Latest Products</h1>
+                <h1 className="text-5xl  mb-6">Latest Products</h1>
 
                 <Products />
                 <div className="flex justify-center mt-8">

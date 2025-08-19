@@ -94,14 +94,14 @@ const About = () => {
               <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
                 A reliable global distributor of high-quality mechanical parts with strong logistics and international compliance.
               </p>
-              <button className="border border-teal-600 text-teal-600 px-4 py-2 rounded hover:bg-teal-600 hover:text-white transition duration-300 w-fit">
+              {/* <button className="border border-teal-600 text-teal-600 px-4 py-2 rounded hover:bg-teal-600 hover:text-white transition duration-300 w-fit">
                 Introduction of Hikotek
-              </button>
+              </button> */}
             </div>
           </div>
 
           {/* Stat Box */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[50%] sm:w-[65%] bg-blue-600 p-6 rounded-lg shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-6 text-white text-center">
+          <div className="absolute left-1/2 transform -translate-x-1/2 bottom-8 w-[50%] sm:w-[65%] bg-blue-600 p-6 rounded-lg shadow-xl grid grid-cols-1 sm:grid-cols-3 gap-6 text-white text-center ">
             <div>
               <div className="text-2xl font-bold">22</div>
               <div className="mt-1 text-sm">Categories</div>
