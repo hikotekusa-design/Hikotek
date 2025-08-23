@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/ProductViewer.css';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { productApi } from '../services/productApi'
 
 function ProductViewer() {
-    const nav = useNavigate();
-    const products = [
-        { name: 'Star Safire 380X', image: "https://www.flir.eu/globalassets/imported-assets/image/380x-hd-hdc-product-images.png", description: "High-definition thermal imaging camera for advanced surveillance." },
-        { name: 'Flir Mix X-Series Starter kit', image: 'https://www.flir.eu/globalassets/imported-assets/image/flir_mix_x-series_eosense_front_side.png', description: "Comprehensive starter kit for thermal imaging applications." },
-        { name: 'Flir Si2', image: 'https://www.flir.eu/globalassets/industrial/instruments/condition-monitoring/acoustic-imaging/why-you-should-choose-the-flir-si2/si2-product-image.png', description: "Acoustic imaging solution for industrial diagnostics." },
-        { name: 'Flir PV Kit', image: 'https://www.flir.eu/globalassets/imported-assets/image/pv-kit-2_600x625.png', description: "Portable kit for photovoltaic system inspections." },
-        { name: 'Flir Ex Pro', image: 'https://www.flir.eu/globalassets/industrial/pdp-blocks/ex-xt/e8-pro-alt.png', description: "Professional-grade thermal camera with enhanced features." },
-    ];
-
+  const nav = useNavigate();
+    const [products, setProducts] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchShowcaseProducts = async () => {
+            try {
+                const result = await productApi.getShowcaseProducts();
+                if (result.success && result.data) {
+                    setProducts(result.data);
+                } else {
+                    setError('Failed to load products');
+                }
+            } catch (err) {
+                setError('Error fetching products: ' + err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchShowcaseProducts();
+    }, []);
+
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length);
@@ -66,6 +82,38 @@ function ProductViewer() {
         }
     };
 
+    if (loading) {
+        return (
+            <div className="product-viewer">
+                <div className="loading">Loading products...</div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="product-viewer">
+                <div className="error">
+                    Error: {error}
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="view-product-button"
+                    >
+                        Retry
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    if (products.length === 0) {
+        return (
+            <div className="product-viewer">
+                <div className="no-products">No products available</div>
+            </div>
+        );
+    }
+
     return (
         <div className="product-viewer">
             <button className="nav-button prev" onClick={handlePrev}>
@@ -100,7 +148,7 @@ function ProductViewer() {
                                 }}
                             >
                                 <motion.img
-                                    src={product.image}
+                                    src={product.mainImage}
                                     alt={product.name}
                                     animate={{ scale: index === 2 ? 1.1 : 0.9 }}
                                 />
@@ -117,13 +165,13 @@ function ProductViewer() {
                                 {index === 2 && (
                                     <>
                                         <motion.p className="product-description">
-                                            {product.description}
+                                            {product.highlight}
                                         </motion.p>
                                         <motion.button
                                             className="view-product-button"
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                nav('/products');
+                                                nav(`/products/${product.id}`);
                                             }}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}

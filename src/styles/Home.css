@@ -149,7 +149,7 @@ body {
 
 .cta-button {
   background: #ffffff;
-  color: #1e40af;
+  color: #104686;
   border: none;
   padding: 0.75rem 2rem;
   font-size: 1.1rem;
@@ -214,7 +214,7 @@ body {
 }
 
 .dot.active {
-  background: #3b82f6;
+  background: #104686;
 }
 
 /* Contact Section Styles */
@@ -237,14 +237,14 @@ body {
 }
 
 .contact-section a {
-  color: #3b82f6;
+  color: #104686;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .contact-section a:hover {
-  color: #1e40af;
+  color: #104686;
 }
 
 .map-container {
@@ -310,13 +310,13 @@ body {
 }
 
 .info-card-content a {
-  color: #3b82f6;
+  color: #104686;
   font-weight: 600;
   text-decoration: none;
 }
 
 .info-card-content a:hover {
-  color: #1d4ed8;
+  color: #104686;
 }
 
 .center-card {

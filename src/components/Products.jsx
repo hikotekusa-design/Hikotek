@@ -1,86 +1,100 @@
-import React from 'react';
-import { FaShoppingCart, FaRegHeart, FaExchangeAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaShoppingCart, FaRegHeart, FaExchangeAlt, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
-const products = [
-  {
-    id: 1,
-    brand: "Mitutoyo",
-    title: "Mitutoyo 293-243-30 Digimatic Micrometer, Range 75",
-    image: "https://caltecharab.com/public/uploads/images/03-05-2025/68164f63503fc.webp",
-    price: "USD 1,140.00"
-  },
-  {
-    id: 2,
-    brand: "Mitutoyo",
-    title: "Mitutoyo 293-250-30 Coolant Proof Digital Micrometer",
-    image: "https://caltecharab.com/public/uploads/images/03-05-2025/681654793e931.webp",
-    price: "USD 2,340.00"
-  },
-  {
-    id: 3,
-    brand: "Mitutoyo",
-    title: "Mitutoyo 293-251-30 Coolant Proof Micrometer Range",
-    image: "https://caltecharab.com/public/uploads/images/03-05-2025/68165b1fdd921.jpeg",
-    price: "USD 2,385.00"
-  },
-  {
-    id: 4,
-    brand: "Mitutoyo",
-    title: "Mitutoyo 293-252-30 Digital Coolant Proof Micromet",
-    image: "https://caltecharab.com/public/uploads/images/04-05-2025/68173a0972d2b.jpeg",
-    price: "USD 2,325.00"
-  },
-  {
-    id: 5,
-    brand: "Other Brand",
-    title: "TempU08 Single Use Temperature Data Logger Range",
-    image: "https://caltecharab.com/public/uploads/images/03-05-2025/68165e0171aad.webp",
-    price: "USD 65.00"
-  },
-  {
-    id: 6,
-    brand: "Other Brand",
-    title: "TempU08 Single Use Temperature Data Logger Range",
-    image: "https://caltecharab.com/public/uploads/images/04-05-2025/68173a0972d2b.jpeg",
-    price: "USD 65.00"
-  },
-];
+import { productApi } from '../services/productApi';
 
 const ProductCard = ({ product }) => (
-  <Link to="/products">
+  <Link to={`/products/${product.id}`}>
     <div className="relative border p-4 rounded shadow-sm hover:shadow-md transition duration-300 bg-white min-h-[380px] group cursor-pointer">
-
       {/* Image */}
-      <img src={product.image} alt={product.title} className="h-48 mx-auto object-contain" />
+      <img 
+        src={product.mainImage} 
+        alt={product.title} 
+        className="max-h-full max-w-full object-contain"
+        onError={(e) => {
+          e.target.src = 'https://via.placeholder.com/200';
+        }}
+      />
+
+      <div className="text-center text-2xl text-black mt-1">{product.name}</div> <br />
+
+      <div className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">
+        {product.highlight}
+      </div>
 
       
-
-      {/* Brand */}
-      <div className="text-center text-2xl text-black mt-1 ">{product.brand}</div>
-
-      {/* Title */}
-      <div className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">{product.title}</div>
-
-      {/* Button & Price */}
-      <div className="mt-3 text-center">
-        {/* <button className="bg-blue-900 text-white px-4 py-1 rounded-full text-sm flex items-center gap-2 mx-auto">
-          Enquiry Now
-        </button> */}
-        <div className="mt-2 font-bold text-blue-900">{product.price}</div>
-      </div>
     </div>
   </Link>
 );
 
 const Products = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchShowcaseProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await productApi.getShowcaseProducts();
+        
+        if (response.success) {
+          setProducts(response.data);
+        } else {
+          setError(response.error || 'Failed to fetch products');
+        }
+      } catch (err) {
+        setError(err.message || 'Failed to fetch products');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchShowcaseProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="py-10 px-4 md:px-16 xl:px-32 bg-gray-100 max-w-[1600px] mx-auto min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <FaSpinner className="animate-spin text-4xl text-blue-900 mx-auto mb-4" />
+          <p className="text-gray-600">Loading products...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="py-10 px-4 md:px-16 xl:px-32 bg-gray-100 max-w-[1600px] mx-auto min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-500 mb-4">Error: {error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="bg-blue-900 text-white px-6 py-2 rounded-md hover:bg-blue-800 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="py-10 px-4 md:px-16 xl:px-32 bg-gray-100 max-w-[1600px] mx-auto">
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 group">
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+      <h1 className="text-3xl font-bold text-center mb-8 text-blue-900">Featured Products</h1>
+      
+      {products.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-600 text-lg">No products available at the moment.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 group">
+          {products.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

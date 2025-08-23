@@ -66,7 +66,7 @@ const DistributorApply = () => {
           className="w-full h-full object-cover object-center"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-600/80 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#104686] to-[#104686]  flex items-center justify-center">
           <motion.div
             className="text-center px-4"
             initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,7 @@ const DistributorApply = () => {
             >
               <button 
                 onClick={scrollToForm}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition duration-300 shadow-lg flex items-center gap-2"
+                className="bg-[#104686]  hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition duration-300 shadow-lg flex items-center gap-2"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
@@ -136,7 +136,7 @@ const DistributorApply = () => {
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600 text-xl font-bold">
                       {idx + 1}
                     </div>
-                    <h3 className="font-bold text-xl text-gray-900 mb-3">{step.title}</h3>
+                    <h3 className="font-bold text-xl text-[#104686]  mb-3">{step.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{step.desc}</p>
                   </div>
                 </motion.div>
@@ -249,7 +249,7 @@ const DistributorApply = () => {
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className={`bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-lg text-lg font-semibold transition ${
+                    className={`bg-[#104686]  hover:bg-blue-700 text-white px-10 py-4 rounded-lg text-lg font-semibold transition ${
                       isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                     }`}
                   >

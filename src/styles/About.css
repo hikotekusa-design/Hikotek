@@ -1,5 +1,5 @@
 .about-hero {
-  background: linear-gradient(135deg, #001f3f 0%, #4b79a1 50%, #ffffff 100%); 
+  background: linear-gradient(135deg, #001f3f 0%, #104686 50%, #ffffff 100%); 
   position: relative;
   overflow: hidden;
 }
@@ -91,7 +91,7 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .about-hero {
-    background: linear-gradient(135deg, #001f3f 0%, #4b79a1 70%, #e2e8f0 100%); 
+    background: linear-gradient(135deg, #001f3f 0%, #104686 70%, #e2e8f0 100%); 
   }
   .company-name {
     font-size: 3rem;

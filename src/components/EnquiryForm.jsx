@@ -478,7 +478,7 @@ const EnquiryForm = ({ onClose }) => {
                 type="submit"
                 disabled={isSubmitting}
                 className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition ${
-                  isSubmitting ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'
+                  isSubmitting ? 'bg-[#104686]  ' : 'bg-[#104686]   hover:[#104686]  '
                 }`}
               >
                 {isSubmitting ? (

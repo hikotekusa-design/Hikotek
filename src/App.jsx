@@ -17,6 +17,7 @@ import AdminProducts from './pages/Admin/AdminProducts'
 import AddProducts from './pages/Admin/AddProducts'
 import AdminEnquiries from './pages/Admin/AdminEnquiries'
 import AdminDistributors from './pages/Admin/AdminDistributors'
+import Downloads from './pages/Downloads'
 
 function App() {
   const location = useLocation()
@@ -33,17 +34,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
-        <Route path='/products' element={<ProductPage />} />
+        <Route path='/products/:id' element={<ProductPage />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/distributor' element={<DistributorApply />} />
         <Route path='/moreproducts' element={<MoreProdutsPg />} />
-        <Route path='/admin/login' element={<Auth />} />
-        <Route path='/admin/dashboard' element={<AdminDash />} />
-        {/* <Route path='/admin/dashboard' element={<AdminDash />} /> */}
-        <Route path='/admin/products' element={<AdminProducts />} />
-        <Route path='/admin/products/add' element={<AddProducts />} />
-        <Route path='/admin/enquiries' element={<AdminEnquiries />} />
-        <Route path='/admin/distributors' element={<AdminDistributors/>}/>
+        <Route path='/download' element={<Downloads />} />
+
+        
 
 
 

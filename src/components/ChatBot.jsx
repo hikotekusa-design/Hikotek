@@ -10,7 +10,7 @@ const ChatBot = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg focus:outline-none"
+          className="bg-[#104686]    text-white p-4 rounded-full shadow-lg focus:outline-none"
         >
           {isOpen ? <FaTimes size={20} /> : <FaComments size={20} />}
         </button>
@@ -20,7 +20,7 @@ const ChatBot = () => {
       {isOpen && (
         <div className="fixed bottom-20 right-6 w-80 max-h-[500px] bg-white border border-gray-300 shadow-xl rounded-lg flex flex-col overflow-hidden z-50">
           {/* Header */}
-          <div className="bg-blue-600 text-white px-4 py-3 font-semibold">
+          <div className="bg-[#104686]   text-white px-4 py-3 font-semibold">
             Chat Support
           </div>
 

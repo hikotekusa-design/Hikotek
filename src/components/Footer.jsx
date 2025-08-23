@@ -19,7 +19,7 @@ const Footer = () => {
             className="w-full py-3 pr-32 pl-4 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <button
-            className="absolute top-1/2 right-1 transform -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200"
+            className="absolute top-1/2 right-1 transform -translate-y-1/2 bg-[#104686] text-white px-6 py-2 rounded-full font-medium transition-colors duration-200"
           >
             Subscribe
           </button>
@@ -28,7 +28,7 @@ const Footer = () => {
 
       {/* Footer Main */}
       <div className="bg-white py-10 border-t border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-sm">
+        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm">
           
           {/* Company Info */}
           <div>
@@ -51,6 +51,18 @@ const Footer = () => {
               <li><a href="/distributor" className="hover:underline">Distributor Apply</a></li>
               <li><a href="/about" className="hover:underline">About Us</a></li>
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+            </ul>
+          </div>
+
+          {/* Customer Service Links */}
+          <div>
+            <h4 className="font-semibold mb-3">Customer Service</h4>
+            <ul className="space-y-1">
+              <li><a href="/support" className="hover:underline">Product Support</a></li>
+              <li><a href="/warranty" className="hover:underline">Product Warranty</a></li>
+              <li><a href="/registration" className="hover:underline">Product Registration</a></li>
+              <li><a href="/tech-support" className="hover:underline">Technical Support</a></li>
+              <li><a href="/downloads" className="hover:underline">Downloads</a></li>
             </ul>
           </div>
 

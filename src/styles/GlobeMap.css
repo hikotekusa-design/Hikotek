@@ -58,7 +58,7 @@
 .globe-modal h3 {
   margin-bottom: 2.5rem;
   font-size: 2rem;
-  color: #0a4db8;
+  color: #104686;
   font-weight: 600;
 }
 
@@ -92,20 +92,20 @@
 }
 
 .region-link:hover {
-  color: #0a4db8;
+  color: #104686;
 }
 
 .region-link:hover::after {
-  background-color: #0a4db8;
+  background-color: #104686;
 }
 
 .region-link.active {
-  color: #0a4db8;
+  color: #104686;
   font-weight: 600;
 }
 
 .region-link.active::after {
-  background-color: #0a4db8;
+  background-color: #104686;
   height: 3px;
 }
 

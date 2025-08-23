@@ -9,14 +9,14 @@ const services = [
     icon: <FaToolbox size={40} />,
     image: 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/loBplKmolkSRjlrnomrliq/Magnetic-Measurement-Banner.png',
     description: 'Get expert help with equipment setup and maintenance.',
-    path: '/technical-support'
+    path: '/moreproducts'
   },
   {
     title: 'Custom Solutions',
     icon: <FaCogs size={40} />,
     image: 'https://ijrorwxhqkiklq5p-static.micyjz.com/cloud/lqBplKmolkSRmkmoljnkip/3.png',
     description: 'We design tailored solutions to meet your business needs.',
-    path: '/custom-solutions'
+    path: '/moreproducts'
   },
 ];
 
@@ -33,7 +33,6 @@ const SolutionsAndServices = () => {
 
   return (
     <div className="solutions-section">
-      <h2 className="solutions-title">Solutions and Services</h2>
       <div className="solutions-container">
         {services.map((service, index) => (
           <div

@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="bg-gradient-to-br from-blue-50 to-white text-gray-900 min-h-screen font-sans">
       {/* Heading with Animation */}
       <div className="text-center py-14 px-4 animate-fadeIn">
-        <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-blue-800 mb-4 drop-shadow-sm">
+        <h1 className="text-5xl font-extrabold text-[#104686] bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-blue-800 mb-4 drop-shadow-sm">
           Get in Touch
         </h1>
         <p className="text-lg text-gray-700 font-medium max-w-xl mx-auto">
@@ -33,17 +33,17 @@ const Contact = () => {
             key={index}
             className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 transform hover:-translate-y-2 p-6 border border-gray-100"
           >
-            <h3 className="text-xl font-bold text-blue-800 mb-4 border-b pb-2">
+            <h3 className="text-xl font-bold text-[#104686] mb-4 border-b pb-2">
               {office.title}
             </h3>
             <p className="text-gray-700 font-medium">{office.name}</p>
             <p className="text-gray-600">{office.address}</p>
             <div className="mt-4 space-y-1">
-              <p className="flex items-center text-blue-700">
-                <FaPhoneAlt className="mr-2" /> <span className="text-gray-800">{office.phone}</span>
+              <p className="flex items-center text-[#104686]">
+                <FaPhoneAlt className="mr-2" /> <span className="text-[#104686] ">{office.phone}</span>
               </p>
-              <p className="flex items-center text-blue-700">
-                <FaEnvelope className="mr-2" /> <span className="text-gray-800">{office.email}</span>
+              <p className="flex items-center text-[#104686]">
+                <FaEnvelope className="mr-2" /> <span className="text-[#104686] ">{office.email}</span>
               </p>
             </div>
           </div>
