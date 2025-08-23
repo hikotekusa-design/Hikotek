@@ -82,7 +82,6 @@ const Products = () => {
 
   return (
     <div className="py-10 px-4 md:px-16 xl:px-32 bg-gray-100 max-w-[1600px] mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-900">Featured Products</h1>
       
       {products.length === 0 ? (
         <div className="text-center py-12">
