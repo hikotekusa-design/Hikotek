@@ -85,39 +85,39 @@ function Home() {
                     {/* Card 1 */}
                     <div className="info-card">
                         <img src="https://www.flir.eu/globalassets/defense/spine-pages/teaser-gov.jpg" alt="Mission" />
-                        <div className="info-card-content">
-                            <h4>FOR YOUR MISSION</h4>
+                        {/* <div className="info-card-content"> */}
+                            {/* <h4>FOR YOUR MISSION</h4>
                             <p>
                                 Stay locked-in on what’s in front of you. We’ve got your back with the powerful,
                                 unrivaled advantage of best-in-class surveillance, imaging and intelligence.
-                            </p>
-                            <a href="#">Learn more »</a>
-                        </div>
+                            </p> */}
+                            {/* <a href="#">Learn more »</a> */}
+                        {/* </div> */}
                     </div>
 
                     {/* Card 2 */}
                     <div className="info-card">
                         <img src="https://www.flir.eu/globalassets/industrial/teaser-blocks/teaser-industrial-2.jpg" alt="Work" />
-                        <div className="info-card-content">
-                            <h4>FOR YOUR WORK</h4>
+                        {/* <div className="info-card-content"> */}
+                            {/* <h4>FOR YOUR WORK</h4>
                             <p>
                                 Make your machines work harder. Produce more. Repair less. Work smarter with brilliant
                                 technology that makes critical decision-making clear as day.
                             </p>
-                            <a href="#">Learn more »</a>
-                        </div>
+                            <a href="#">Learn more »</a> */}
+                        {/* </div> */}
                     </div>
 
                     {/* Card 3 */}
                     <div className="info-card">
                         <img src="https://www.flir.eu/globalassets/industrial/teaser-blocks/teaser-life-2.jpg" alt="Life" />
-                        <div className="info-card-content">
-                            <h4>FOR YOUR LIFE</h4>
+                        {/* <div className="info-card-content"> */}
+                            {/* <h4>FOR YOUR LIFE</h4>
                             <p>
                                 Ever wonder what it’s like to be a superhero? Seeing is unbelievable.
                             </p>
-                            <a href="#">Learn more »</a>
-                        </div>
+                            <a href="#">Learn more »</a> */}
+                        {/* </div> */}
                     </div>
                 </div>
             </section>
@@ -136,7 +136,7 @@ function Home() {
                 <div className="flex justify-center mt-8">
                     <button
                         onClick={() => navigate('/moreproducts')}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-full transition"
+                        className="bg-[#104686]  text-white font-semibold px-6 py-2 rounded-full transition"
                     >
                         View More Products
                     </button>

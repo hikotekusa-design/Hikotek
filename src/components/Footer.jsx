@@ -59,10 +59,10 @@ const Footer = () => {
             <h4 className="font-semibold mb-3">Customer Service</h4>
             <ul className="space-y-1">
               <li><a href="/support" className="hover:underline">Product Support</a></li>
-              <li><a href="/warranty" className="hover:underline">Product Warranty</a></li>
-              <li><a href="/registration" className="hover:underline">Product Registration</a></li>
+              {/* <li><a href="/warranty" className="hover:underline">Product Warranty</a></li> */}
+              {/* <li><a href="/registration" className="hover:underline">Product Registration</a></li> */}
               <li><a href="/tech-support" className="hover:underline">Technical Support</a></li>
-              <li><a href="/downloads" className="hover:underline">Downloads</a></li>
+              {/* <li><a href="/downloads" className="hover:underline">Downloads</a></li> */}
             </ul>
           </div>
 
@@ -78,8 +78,8 @@ const Footer = () => {
               <a href="#"><FaFacebook /></a>
               <a href="#"><FaInstagram /></a>
               <a href="#"><FaXTwitter /></a>
-              <a href="#"><FaTiktok /></a>
-              <a href="#"><FaPinterest /></a>
+              {/* <a href="#"><FaTiktok /></a> */}
+              {/* <a href="#"><FaPinterest /></a> */}
               <a href="#"><FaYoutube /></a>
             </div>
           </div>

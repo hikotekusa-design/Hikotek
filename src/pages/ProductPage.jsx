@@ -64,7 +64,7 @@ const ProductPage = () => {
             </p>
             {product.specifications && product.specifications.length > 0 && (
               <>
-                <p className="font-semibold text-orange-600 mt-6 text-xl">SPECIFICATIONS</p>
+                <p className="font-semibold text-[#104686] mt-6 text-xl">SPECIFICATIONS</p>
                 <ul className="list-disc ml-8">
                   {product.specifications.map((spec, idx) => (
                     <li key={idx} className="text-base mb-2">

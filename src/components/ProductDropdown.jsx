@@ -97,7 +97,7 @@ function ProductDropdown() {
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
-      <a className="text-blue-950 py-2 cursor-pointer hover:text-blue-800 transition-colors flex items-center">
+      <a className="text-blue-950 py-2 cursor-pointer hover:text-blue-800 transition-colors flex items-center" href='/moreproducts'>
         Products
         <i className="fa-solid fa-caret-down ml-1 text-sm"></i>
       </a>

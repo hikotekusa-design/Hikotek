@@ -84,6 +84,9 @@ const performSearch = async () => {
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
             <i className="fab fa-twitter"></i>
           </a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+            <i className="fab fa-youtube"></i>
+          </a>
         </div>
       </div>
 
@@ -199,16 +202,6 @@ const performSearch = async () => {
                 <ProductDropdown />
               )}
             </div>
-            <div className="nav-item">
-              <a href="/distributor" onClick={toggleMobileMenu}>
-                Join our Network
-              </a>
-            </div>
-            <div className="nav-item gap-2">
-              <a href="/download" onClick={toggleMobileMenu}>
-                Downloads
-              </a>
-            </div>
             <div className="nav-item gap-2">
               <a href="/about" onClick={toggleMobileMenu}>
                 About Us
@@ -219,6 +212,19 @@ const performSearch = async () => {
                 Contact Us
               </a>
             </div>
+            <div className="nav-item">
+              <a href="/distributor" onClick={toggleMobileMenu}>
+                Join our Network
+              </a>
+            </div>
+             
+            {/* <div className="nav-item gap-2">
+              <a href="/download" onClick={toggleMobileMenu}>
+                Downloads
+              </a>
+            </div> */}
+            
+           
           </div>
         </div>
       </header>

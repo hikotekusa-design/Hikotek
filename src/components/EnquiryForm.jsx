@@ -190,7 +190,7 @@ const EnquiryForm = ({ onClose }) => {
   { value: 'Iraq', label: 'Iraq' },
   { value: 'Ireland', label: 'Ireland' },
   { value: 'Isle of Man', label: 'Isle of Man' },
-  { value: 'Israel', label: 'Israel' },
+  // { value: 'Israel', label: 'Israel' },
   { value: 'Italy', label: 'Italy' },
   { value: 'Jamaica', label: 'Jamaica' },
   { value: 'Japan', label: 'Japan' },
@@ -203,7 +203,7 @@ const EnquiryForm = ({ onClose }) => {
   { value: 'Kyrgyzstan', label: 'Kyrgyzstan' },
   { value: 'Laos', label: 'Lao People’s Democratic Republic' },
   { value: 'Latvia', label: 'Latvia' },
-  { value: 'Lebanon', label: 'Lebanon' },
+  // { value: 'Lebanon', label: 'Lebanon' },
   { value: 'Lesotho', label: 'Lesotho' },
   { value: 'Liberia', label: 'Liberia' },
   { value: 'Libya', label: 'Libya' },
@@ -249,7 +249,7 @@ const EnquiryForm = ({ onClose }) => {
   { value: 'Oman', label: 'Oman' },
   { value: 'Pakistan', label: 'Pakistan' },
   { value: 'Palau', label: 'Palau' },
-  { value: 'Palestine', label: 'Palestine, State of' },
+  // { value: 'Palestine', label: 'Palestine, State of' },
   { value: 'Panama', label: 'Panama' },
   { value: 'Papua New Guinea', label: 'Papua New Guinea' },
   { value: 'Paraguay', label: 'Paraguay' },
@@ -294,7 +294,7 @@ const EnquiryForm = ({ onClose }) => {
   { value: 'Svalbard and Jan Mayen', label: 'Svalbard and Jan Mayen' },
   { value: 'Sweden', label: 'Sweden' },
   { value: 'Switzerland', label: 'Switzerland' },
-  { value: 'Syrian Arab Republic', label: 'Syrian Arab Republic' },
+  // { value: 'Syrian Arab Republic', label: 'Syrian Arab Republic' },
   { value: 'Taiwan', label: 'Taiwan, Province of China' },
   { value: 'Tajikistan', label: 'Tajikistan' },
   { value: 'Tanzania', label: 'Tanzania, United Republic of' },
@@ -319,7 +319,7 @@ const EnquiryForm = ({ onClose }) => {
   { value: 'Vietnam', label: 'Viet Nam' },
   { value: 'Wallis and Futuna', label: 'Wallis and Futuna' },
   { value: 'Western Sahara', label: 'Western Sahara' },
-  { value: 'Yemen', label: 'Yemen' }
+  // { value: 'Yemen', label: 'Yemen' }
 ];
 
 
