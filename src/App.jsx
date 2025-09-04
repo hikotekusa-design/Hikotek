@@ -11,12 +11,7 @@ import MoreProdutsPg from './pages/MoreProdutsPg'
 import ChatBot from './components/ChatBot'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Auth from './pages/Admin/Auth'
-import AdminDash from './pages/Admin/AdminDash'
-import AdminProducts from './pages/Admin/AdminProducts'
-import AddProducts from './pages/Admin/AddProducts'
-import AdminEnquiries from './pages/Admin/AdminEnquiries'
-import AdminDistributors from './pages/Admin/AdminDistributors'
+
 import Downloads from './pages/Downloads'
 
 function App() {
