@@ -13,6 +13,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 
 import Downloads from './pages/Downloads'
+import CategoryProducts from './pages/CategoryProducts'
 
 function App() {
   const location = useLocation()
@@ -33,6 +34,8 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/distributor' element={<DistributorApply />} />
         <Route path='/moreproducts' element={<MoreProdutsPg />} />
+        <Route path='/categoryproducts' element={<CategoryProducts />} />
+
         <Route path='/download' element={<Downloads />} />
 
         

@@ -68,19 +68,19 @@ const Footer = () => {
 
           {/* App Download + Social */}
           <div>
-            <h4 className="font-semibold mb-3">Download Our App</h4>
+            {/* <h4 className="font-semibold mb-3">Download Our App</h4>
             <p className="mb-3">Shop on the go with our mobile app</p>
             <div className="flex gap-3 mb-4">
               <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Available_on_the_App_Store_%28black%29_SVG.svg" alt="App Store" className="w-28" />
               <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-28" />
-            </div>
+            </div> */}
             <div className="flex gap-4 text-gray-600 text-lg">
-              <a href="#"><FaFacebook /></a>
-              <a href="#"><FaInstagram /></a>
-              <a href="#"><FaXTwitter /></a>
+              <a href=""><FaFacebook /></a>
+              <a href="https://www.instagram.com/hikotek_llc/#"><FaInstagram /></a>
+              <a href="https://x.com/hikotek "><FaXTwitter /></a>
               {/* <a href="#"><FaTiktok /></a> */}
               {/* <a href="#"><FaPinterest /></a> */}
-              <a href="#"><FaYoutube /></a>
+              <a href=""><FaYoutube /></a>
             </div>
           </div>
         </div>
