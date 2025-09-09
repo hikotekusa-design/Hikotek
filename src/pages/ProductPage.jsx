@@ -28,7 +28,7 @@ const ProductPage = () => {
       setLoading(true);
       setError('');
       try {
-        const response = await productApi.getById(id);
+        const response = await productApi.getPublic(id);
         if (response.success && response.data) {
           setProduct({
             ...response.data,
@@ -235,7 +235,7 @@ const ProductPage = () => {
         <div className="grid md:grid-cols-2 gap-12 bg-[#f6f6f6] p-6 rounded-lg">
           <div className="flex">
             <div className="flex flex-col gap-3 mr-3">
-              {product.images?.length > 0 ? (
+              {product.images?.length > 0 && (
                 product.images.map((img, idx) => (
                   <div
                     key={idx}
@@ -255,11 +255,13 @@ const ProductPage = () => {
                     />
                   </div>
                 ))
-              ) : (
-                <div className="w-16 h-16 rounded-md bg-gray-200 flex items-center justify-center text-gray-500">
-                  No Images
-                </div>
-              )}
+              ) 
+              // : (
+              //   <div className="w-16 h-16 rounded-md bg-gray-200 flex items-center justify-center text-gray-500">
+              //     No Images
+              //   </div>
+              // )
+              }
             </div>
 
             <div className="flex-1 overflow-hidden max-h-[400px] rounded-lg flex items-center justify-center">
@@ -300,11 +302,14 @@ const ProductPage = () => {
                 ))}
               </ul>
             )}
-            {parseProductData.showPrice && !isNaN(parseFloat(parseProductData.price)) && (
-              <p className="text-black font-bold text-2xl mt-6">
-                Price: ${parseFloat(parseProductData.price).toFixed(2)} USD
-              </p>
-            )}
+            {(parseProductData.showPrice === true || parseProductData.showPrice === "true") &&
+  parseProductData.price !== null &&
+  !isNaN(parseFloat(parseProductData.price)) && (
+    <p className="text-black font-bold text-2xl mt-6">
+      Price: ${parseFloat(parseProductData.price).toFixed(2)} USD
+    </p>
+)}
+
             <button
               onClick={toggleEnquiryModal}
               className="mt-6 px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300 border-2 border-[#104686] text-[#104686] hover:bg-[#104686] hover:text-white hover:shadow-lg"

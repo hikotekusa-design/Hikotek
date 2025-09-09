@@ -1,9 +1,63 @@
-import React from 'react';
-import { FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
 import { FaFacebook, FaInstagram, FaXTwitter, FaTiktok, FaPinterest, FaYoutube } from "react-icons/fa6";
 import HikotekLogo from '../assets/Hikotek_Logo.png';
+import { publicFooterApi } from '../services/FooterApi';
 
 const Footer = () => {
+  const [footerData, setFooterData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch footer data on component mount
+  useEffect(() => {
+    fetchFooterData();
+  }, []);
+
+  const fetchFooterData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await publicFooterApi.getActiveFooter();
+      
+      if (response.success) {
+        setFooterData(response.data);
+      } else {
+        setError('Failed to load footer data');
+      }
+    } catch (err) {
+      console.error('Error fetching footer data:', err);
+      setError('Failed to load footer information');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fallback data in case API fails or during loading
+  const fallbackData = {
+    description: "Hikotek LLC - Premium quality products and innovative solutions for your needs.",
+    email: "hello@hikotek.com",
+    phone: "+1 (555) 123-4567",
+    address: "123 Business Street, New York, NY 10001",
+    facebook: "https://facebook.com/hikotek",
+    instagram: "https://www.instagram.com/hikotek_llc/",
+    twitter: "https://x.com/hikotek",
+    youtube: "https://youtube.com/hikotek"
+  };
+
+  // Use fetched data or fallback data
+  const data = footerData || fallbackData;
+
+  if (loading) {
+    return (
+      <footer className="bg-gray-100 text-gray-700 pt-10">
+        <div className="max-w-6xl mx-auto px-4 py-8 text-center">
+          <p>Loading footer...</p>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="bg-gray-100 text-gray-700 pt-10">
       {/* Newsletter */}
@@ -36,10 +90,23 @@ const Footer = () => {
               <img src={HikotekLogo} alt="Hikotek Logo" className="w-32" />
             </a>
             <p className="mt-4 mb-4 text-sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in nibh vehicula.
+              {data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla in nibh vehicula."}
             </p>
-            <p className="flex items-center gap-2"><FaMapMarkerAlt /> 123 Fashion Street, New York, NY 10001</p>
-            <p className="flex items-center gap-2 mt-1"><FaEnvelope /> hello@example.com</p>
+            {data.address && (
+              <p className="flex items-center gap-2">
+                <FaMapMarkerAlt /> {data.address}
+              </p>
+            )}
+            {data.email && (
+              <p className="flex items-center gap-2 mt-1">
+                <FaEnvelope /> {data.email}
+              </p>
+            )}
+            {data.phone && (
+              <p className="flex items-center gap-2 mt-1">
+                <FaPhone /> {data.phone}
+              </p>
+            )}
           </div>
 
           {/* Company Links */}
@@ -59,34 +126,52 @@ const Footer = () => {
             <h4 className="font-semibold mb-3">Customer Service</h4>
             <ul className="space-y-1">
               <li><a href="/support" className="hover:underline">Product Support</a></li>
-              {/* <li><a href="/warranty" className="hover:underline">Product Warranty</a></li> */}
-              {/* <li><a href="/registration" className="hover:underline">Product Registration</a></li> */}
               <li><a href="/tech-support" className="hover:underline">Technical Support</a></li>
-              {/* <li><a href="/downloads" className="hover:underline">Downloads</a></li> */}
             </ul>
           </div>
 
-          {/* App Download + Social */}
+          {/* Social Media Links */}
           <div>
-            {/* <h4 className="font-semibold mb-3">Download Our App</h4>
-            <p className="mb-3">Shop on the go with our mobile app</p>
-            <div className="flex gap-3 mb-4">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Available_on_the_App_Store_%28black%29_SVG.svg" alt="App Store" className="w-28" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" className="w-28" />
-            </div> */}
-            <div className="flex gap-4 text-gray-600 text-lg">
-              <a href=""><FaFacebook /></a>
-              <a href="https://www.instagram.com/hikotek_llc/#"><FaInstagram /></a>
-              <a href="https://x.com/hikotek "><FaXTwitter /></a>
-              {/* <a href="#"><FaTiktok /></a> */}
-              {/* <a href="#"><FaPinterest /></a> */}
-              <a href=""><FaYoutube /></a>
+            <h4 className="font-semibold mb-3">Follow Us</h4>
+            <div className="flex gap-4 text-gray-600 text-lg mb-4">
+              {data.facebook && (
+                <a href={data.facebook} target="_blank" rel="noopener noreferrer">
+                  <FaFacebook />
+                </a>
+              )}
+              {data.instagram && (
+                <a href={data.instagram} target="_blank" rel="noopener noreferrer">
+                  <FaInstagram />
+                </a>
+              )}
+              {data.twitter && (
+                <a href={data.twitter} target="_blank" rel="noopener noreferrer">
+                  <FaXTwitter />
+                </a>
+              )}
+              {data.youtube && (
+                <a href={data.youtube} target="_blank" rel="noopener noreferrer">
+                  <FaYoutube />
+                </a>
+              )}
             </div>
+            
+            {/* Optional: Add social media follow text */}
+            <p className="text-xs text-gray-500 mt-2">
+              Follow us for updates and promotions
+            </p>
           </div>
         </div>
       </div>
 
       
+
+      {/* Error message (hidden by default) */}
+      {error && (
+        <div className="hidden">
+          <p>Footer data error: {error}</p>
+        </div>
+      )}
     </footer>
   );
 };

@@ -18,7 +18,7 @@ const getHighlightText = (highlight) => {
 // Product Card Component
 const ProductCard = ({ product }) => (
   <Link to={`/products/${product.id}`} className="block">
-    <div className="relative border p-4 rounded shadow-sm hover:shadow-md transition duration-300 bg-white h-full flex flex-col product-card">
+    <div className="relative border p-4 rounded shadow-sm hover:shadow-md transition duration-300 bg-white h-full flex flex-col product-card mt-4">
       <div className="flex-grow">
         <img 
           src={product.mainImage} 
@@ -97,7 +97,7 @@ function MoreProductsPg() {
       <div className="px-4 md:px-8 pb-12">
         {products.length > 0 && (
           <div>
-            <h2 className="text-2xl font-semibold mb-6">All Products</h2>
+            {/* <h2 className="text-2xl font-semibold mb-6">All Products</h2> */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
               {products.map(product => (
                 <ProductCard key={`all-${product.id}`} product={product} />

@@ -24,7 +24,7 @@ function ProductDropdown() {
               }
             }
           });
-          
+
           const uniqueCategories = Object.values(categoryMap).sort((a, b) =>
             a.localeCompare(b)
           );
@@ -53,29 +53,32 @@ function ProductDropdown() {
       onMouseEnter={() => setVisible(true)}
       onMouseLeave={() => setVisible(false)}
     >
-      <a className="text-blue-950 py-2 cursor-pointer hover:text-blue-800 transition-colors flex items-center">
+      <a
+        href="/moreproducts"
+        className="text-blue-950 py-2 cursor-pointer hover:text-blue-800 transition-colors flex items-center text-lg font-semibold"
+      >
         Products
         <i className="fa-solid fa-caret-down ml-1 text-sm"></i>
       </a>
       {visible && (
-        <div className="absolute left-0 top-full shadow-lg z-50 border border-gray-200 bg-white rounded-md min-w-[200px] max-h-60 overflow-y-auto">
+        <div className="absolute left-1/2 top-full transform -translate-x-1/2 shadow-lg z-50 border border-gray-200 bg-white rounded-md min-w-[350px] max-h-60 overflow-y-auto">
           <div className="p-2">
             {loading ? (
-              <div className="px-4 py-2 text-gray-500 text-sm">Loading...</div>
+              <div className="px-4 py-2 text-gray-500 text-base">Loading...</div>
             ) : error ? (
-              <div className="px-4 py-2 text-red-500 text-sm">{error}</div>
+              <div className="px-4 py-2 text-red-500 text-base">{error}</div>
             ) : categories.length > 0 ? (
               categories.map((category, idx) => (
                 <div
                   key={idx}
-                  className="cursor-pointer px-4 py-2 transition-colors hover:bg-gray-100 rounded-md text-sm"
+                  className="cursor-pointer px-4 py-2 transition-colors hover:bg-gray-100 rounded-md text-base text-center font-medium"
                   onClick={() => handleCategoryClick(category)}
                 >
                   {category}
                 </div>
               ))
             ) : (
-              <div className="px-4 py-2 text-gray-500 text-sm">
+              <div className="px-4 py-2 text-gray-500 text-base text-center">
                 No categories available
               </div>
             )}

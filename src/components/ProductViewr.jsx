@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { productApi } from '../services/productApi'
 
 function ProductViewer() {
-  const nav = useNavigate();
+    const nav = useNavigate();
     const [products, setProducts] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -14,9 +14,16 @@ function ProductViewer() {
     useEffect(() => {
         const fetchShowcaseProducts = async () => {
             try {
-                const result = await productApi.getShowcaseProducts();
+                const result = await productApi.getShowcaseAllProducts();
                 if (result.success && result.data) {
-                    setProducts(result.data);
+                    const processedProducts = result.data.map(product => ({
+                        ...product,
+                        // Convert highlight to string if it's an object
+                        highlight: typeof product.highlight === 'object'
+                            ? product.highlight.text || JSON.stringify(product.highlight)
+                            : product.highlight
+                    }));
+                    setProducts(processedProducts);
                 } else {
                     setError('Failed to load products');
                 }
@@ -123,14 +130,14 @@ function ProductViewer() {
             </button>
 
             <div className="product-slider">
-                <div className="slider-track static-layout" style={{ gap: '15px' }}> 
+                <div className="slider-track static-layout" style={{ gap: '15px' }}>
                     {visibleProducts.map((product, index) => {
                         const variant =
                             index === 0 ? "farLeft" :
-                            index === 1 ? "left" :
-                            index === 2 ? "center" :
-                            index === 3 ? "right" :
-                            "farRight";
+                                index === 1 ? "left" :
+                                    index === 2 ? "center" :
+                                        index === 3 ? "right" :
+                                            "farRight";
 
                         return (
                             <motion.div
@@ -144,7 +151,7 @@ function ProductViewer() {
                                     else if (index === 3 || index === 4) handleNext();
                                 }}
                                 style={{
-                                    flex: index === 2 ? '0 0 35%' : '0 0 15%' 
+                                    flex: index === 2 ? '0 0 35%' : '0 0 15%'
                                 }}
                             >
                                 <motion.img
@@ -159,13 +166,15 @@ function ProductViewer() {
                                         opacity: index === 2 ? 1 : 0.7
                                     }}
                                 >
-                                    {product.name}
+                                    {product?.name}
                                 </motion.p>
 
                                 {index === 2 && (
                                     <>
                                         <motion.p className="product-description">
-                                            {product.highlight}
+                                            {typeof product?.highlight === 'string'
+                                                ? product.highlight
+                                                : product?.highlight?.text || 'Product description'}
                                         </motion.p>
                                         <motion.button
                                             className="view-product-button"

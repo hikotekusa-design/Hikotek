@@ -5,24 +5,37 @@ import { productApi } from '../services/productApi';
 
 const ProductCard = ({ product }) => (
   <Link to={`/products/${product.id}`}>
-    <div className="relative border p-4 rounded shadow-sm hover:shadow-md transition duration-300 bg-white min-h-[380px] group cursor-pointer">
-      {/* Image */}
-      <img 
-        src={product.mainImage} 
-        alt={product.title} 
-        className="max-h-full max-w-full object-contain"
-        onError={(e) => {
-          e.target.src = 'https://via.placeholder.com/200';
-        }}
-      />
-
-      <div className="text-center text-2xl text-black mt-1">{product.name}</div> <br />
-
-      <div className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">
-        {product.highlight}
+    <div className="relative border p-4 rounded shadow-sm hover:shadow-md transition duration-300 bg-white h-[450px] w-[280px] flex flex-col group cursor-pointer">
+      {/* Image container with fixed height */}
+      <div className="h-64 w-full flex items-center justify-center mb-4 bg-gray-50 rounded">
+        <img 
+          src={product.mainImage} 
+          alt={product.title} 
+          className="max-h-full max-w-full object-contain"
+          onError={(e) => {
+            e.target.src = 'https://via.placeholder.com/200';
+          }}
+        />
       </div>
 
-      
+      {/* Product name with proper text handling */}
+      <div className="flex-grow flex flex-col">
+        <h3 className="text-lg font-medium text-black mb-2 break-words line-clamp-3 h-[72px] overflow-hidden">
+          {product.name}
+        </h3>
+        
+        {/* Optional highlight text */}
+        {product.highlight && (
+          <div className="text-sm text-gray-500 mb-3 line-clamp-2">
+            {product.highlight}
+          </div>
+        )}
+        
+        {/* Price and other details would go here */}
+        <div className="mt-auto">
+          {/* Add price, buttons, etc. here if needed */}
+        </div>
+      </div>
     </div>
   </Link>
 );
@@ -88,9 +101,11 @@ const Products = () => {
           <p className="text-gray-600 text-lg">No products available at the moment.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 group">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center">
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <div key={product.id} className="flex justify-center">
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
       )}

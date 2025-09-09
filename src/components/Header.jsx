@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import "../styles/Header.css";
 import HikotekLogo from "../assets/Hikotek_Logo.png";
 import ProductDropdown from "./ProductDropdown";
 import GlobeMap from "./GlobeMap";
 import { productApi } from "../services/productApi";
+import { publicFooterApi } from '../services/FooterApi';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,12 +14,40 @@ function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [footerData, setFooterData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const isMobile = window.innerWidth <= 768;
 
+  // Fetch footer data
+  useEffect(() => {
+    const fetchFooterData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const response = await publicFooterApi.getActiveFooter();
+        
+        if (response.success) {
+          setFooterData(response.data);
+        } else {
+          setError('Failed to load footer data');
+        }
+      } catch (err) {
+        console.error('Error fetching footer data:', err);
+        setError('Failed to load footer information');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFooterData();
+  }, []);
+
   // Close results dropdown when clicking outside
-  React.useEffect(() => {
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowResults(false);
@@ -40,26 +68,27 @@ function Header() {
   };
 
   // Perform search when clicking the search button
-const performSearch = async () => {
-  if (searchTerm.trim().length === 0) {
-    setSearchResults([]);
-    setShowResults(false);
-    return;
-  }
+  const performSearch = async () => {
+    if (searchTerm.trim().length === 0) {
+      setSearchResults([]);
+      setShowResults(false);
+      return;
+    }
 
-  setIsSearching(true);
-  try {
-    const response = await productApi.searchProducts(searchTerm);
-    setSearchResults(response.data || []);
-    setShowResults(true);
-  } catch (error) {
-    console.error('Search error:', error);
-    setSearchResults([]);
-    setShowResults(true);
-  } finally {
-    setIsSearching(false);
-  }
-};
+    setIsSearching(true);
+    try {
+      const response = await productApi.searchProducts(searchTerm);
+      setSearchResults(response.data || []);
+      setShowResults(true);
+    } catch (error) {
+      console.error('Search error:', error);
+      setSearchResults([]);
+      setShowResults(true);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
   // When clicking on a product name, go to details page
   const handleResultClick = (productId) => {
     navigate(`/products/${productId}`);
@@ -67,26 +96,37 @@ const performSearch = async () => {
     setSearchTerm("");
   };
 
+  // Get email from footer data or use fallback
+  const contactEmail = footerData?.email || "info@hikotek.com";
+
   return (
     <>
       {/* Top Bar */}
       <div className="top-bar">
         <div className="top-bar-left">
-          <span>Need help? Email us: info@hikotek.com</span>
+          <span>Need help? Email us: {contactEmail}</span>
         </div>
         <div className="top-bar-right">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/hikotek_llc/#" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="https://x.com/hikotek" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
-            <i className="fab fa-youtube"></i>
-          </a>
+          {footerData?.facebook && (
+            <a href={footerData.facebook} target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+          )}
+          {footerData?.instagram && (
+            <a href={footerData.instagram} target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-instagram"></i>
+            </a>
+          )}
+          {footerData?.twitter && (
+            <a href={footerData.twitter} target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-twitter"></i>
+            </a>
+          )}
+          {footerData?.youtube && (
+            <a href={footerData.youtube} target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-youtube"></i>
+            </a>
+          )}
         </div>
       </div>
 
@@ -151,36 +191,24 @@ const performSearch = async () => {
 
           <div className="nav-right">
             <div className="globe-dropdown">
-              {/* <i className="fas fa-globe" onClick={toggleGlobeDropdown}></i> */}
               <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 64 64"
-      fill="none"
-      stroke="#104686" // Exact blue color
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-8 h-10"
-      onClick={toggleGlobeDropdown}
-    >
-      {/* Outer Circle */}
-      <circle cx="32" cy="32" r="30" />
-
-      {/* Vertical Longitudes */}
-      <ellipse cx="32" cy="32" rx="14" ry="30" />
-
-        {/* Top Horizontal Curve */}
-      <path d="M2 24 C18 16, 46 16, 62 24" />
-
-      {/* Bottom Horizontal Curve */}
-      <path d="M2 40 C18 48, 46 48, 62 40" />
-
-      {/* Middle Vertical Line */}
-      <line x1="32" y1="2" x2="32" y2="62" />
-
-      {/* Middle Horizontal Line */}
-      <line x1="2" y1="32" x2="62" y2="32" />
-    </svg>
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                fill="none"
+                stroke="#104686"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-8 h-10"
+                onClick={toggleGlobeDropdown}
+              >
+                <circle cx="32" cy="32" r="30" />
+                <ellipse cx="32" cy="32" rx="14" ry="30" />
+                <path d="M2 24 C18 16, 46 16, 62 24" />
+                <path d="M2 40 C18 48, 46 48, 62 40" />
+                <line x1="32" y1="2" x2="32" y2="62" />
+                <line x1="2" y1="32" x2="62" y2="32" />
+              </svg>
             </div>
           </div>
         </nav>
@@ -217,14 +245,6 @@ const performSearch = async () => {
                 Join our Network
               </a>
             </div>
-             
-            {/* <div className="nav-item gap-2">
-              <a href="/download" onClick={toggleMobileMenu}>
-                Downloads
-              </a>
-            </div> */}
-            
-           
           </div>
         </div>
       </header>

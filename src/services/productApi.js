@@ -108,4 +108,24 @@ getShowcaseAllProducts: async () => {
       throw error;
     }
   },
+  getPublic: async (id) => {
+    try {
+      const response = await fetch(`${BASE_URL}/products/public/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch product');
+      }
+
+      return data;
+    } catch (error) {
+      console.error('API Get Product Error:', error);
+      throw error;
+    }
+  },
 }
