@@ -46,7 +46,7 @@ function App() {
 
       </Routes>
 
-      {!shouldHide && <ChatBot />}
+      {/* {!shouldHide && <ChatBot />} */}
       {!shouldHide && <Footer />}
     </>
   )

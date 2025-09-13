@@ -7,7 +7,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedOffice, setSelectedOffice] = useState(null);
-  const [useCustomMap, setUseCustomMap] = useState(true); // State to toggle between custom and address-based maps
+  const [useCustomMap, setUseCustomMap] = useState(true);
 
   useEffect(() => {
     const fetchActiveAddresses = async () => {
@@ -127,12 +127,14 @@ const Contact = () => {
                   </span>
                   {getOfficeByTitle('Head Office').address}
                 </p>
-                <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
-                  <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
-                    <FaPhoneAlt className="text-sm md:text-lg" />
-                  </span>
-                  {getOfficeByTitle('Head Office').phone}
-                </p>
+                {getOfficeByTitle('Head Office').phone && (
+                  <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
+                    <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
+                      <FaPhoneAlt className="text-sm md:text-lg" />
+                    </span>
+                    {getOfficeByTitle('Head Office').phone}
+                  </p>
+                )}
                 <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600">
                   <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
                     <FaEnvelope className="text-sm md:text-lg" />
@@ -159,12 +161,14 @@ const Contact = () => {
                   </span>
                   {getOfficeByTitle('Branch Office').address}
                 </p>
-                <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
-                  <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
-                    <FaPhoneAlt className="text-sm md:text-lg" />
-                  </span>
-                  {getOfficeByTitle('Branch Office').phone}
-                </p>
+                {getOfficeByTitle('Branch Office').phone && (
+                  <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
+                    <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
+                      <FaPhoneAlt className="text-sm md:text-lg" />
+                    </span>
+                    {getOfficeByTitle('Branch Office').phone}
+                  </p>
+                )}
                 <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600">
                   <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
                     <FaEnvelope className="text-sm md:text-lg" />
@@ -191,12 +195,14 @@ const Contact = () => {
                   </span>
                   {getOfficeByTitle('Support Office').address}
                 </p>
-                <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
-                  <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
-                    <FaPhoneAlt className="text-sm md:text-lg" />
-                  </span>
-                  {getOfficeByTitle('Support Office').phone}
-                </p>
+                {getOfficeByTitle('Support Office').phone && (
+                  <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600 mb-2 md:mb-3">
+                    <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
+                      <FaPhoneAlt className="text-sm md:text-lg" />
+                    </span>
+                    {getOfficeByTitle('Support Office').phone}
+                  </p>
+                )}
                 <p className="flex flex-col md:flex-row items-start md:items-center text-gray-600">
                   <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-50 text-[#104686] mr-2 mb-1 md:mb-0">
                     <FaEnvelope className="text-sm md:text-lg" />
@@ -277,45 +283,7 @@ const Contact = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            {selectedOffice && !useCustomMap && (
-              <div className="p-3 md:p-4 bg-white border-t">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-                  <div>
-                    <h4 className="font-semibold text-[#104686] text-sm md:text-base">{selectedOffice.title}</h4>
-                    <p className="text-xs md:text-sm text-gray-600">{selectedOffice.address}</p>
-                  </div>
-                  <a
-                    href={getMapUrl(selectedOffice.address).replace('embed', 'view')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-blue-600 hover:text-blue-800 text-xs md:text-sm"
-                  >
-                    Open in Maps <FaExternalLinkAlt className="ml-1 text-xs md:text-sm" />
-                  </a>
-                </div>
-              </div>
-            )}
-            {useCustomMap && (
-              <div className="p-3 md:p-4 bg-white border-t">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
-                  <div>
-                    <h4 className="font-semibold text-[#104686] text-sm md:text-base">Our Locations</h4>
-                    <p className="text-xs md:text-sm text-gray-600">View all our office locations</p>
-                  </div>
-                  <a
-                    href="https://www.google.com/maps/d/viewer?mid=1r_Fd-9Qt-pjc9Z1_OHB9NDnaIyrTrcE&ehbc=2E312F"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-blue-600 hover:text-blue-800 text-xs md:text-sm"
-                  >
-                    Open in Maps <FaExternalLinkAlt className="ml-1 text-xs md:text-sm" />
-                  </a>
-                </div>
-              </div>
-            )}
           </div>
-          
-         
         </div>
       </div>
     </div>

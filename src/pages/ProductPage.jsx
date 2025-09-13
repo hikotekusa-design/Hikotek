@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaFileDownload } from 'react-icons/fa';
+import { FaFileDownload, FaExpand, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import EnquiryForm from '../components/EnquiryForm';
 import { productApi } from '../services/productApi';
 
@@ -8,12 +8,15 @@ const ProductPage = () => {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState('description');
   const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const imageRef = useRef(null);
   const [transform, setTransform] = useState({ scale: 1, originX: '50%', originY: '50%' });
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [showZoomControls, setShowZoomControls] = useState(false);
 
   const tabs = useMemo(() => {
     const availableTabs = ['description'];
@@ -36,7 +39,9 @@ const ProductPage = () => {
               ? response.data.descriptionAlignment
               : 'left',
           });
-          setSelectedImage(response.data.images?.[0] || response.data.mainImage || '');
+          const firstImage = response.data.images?.[0] || response.data.mainImage || '';
+          setSelectedImage(firstImage);
+          setSelectedImageIndex(0);
         } else {
           setError('Failed to fetch product details.');
         }
@@ -57,6 +62,8 @@ const ProductPage = () => {
   const parseProductData = useMemo(() => {
     if (!product) return product;
     const parsedProduct = { ...product };
+    
+    // Parse specifications
     if (typeof parsedProduct.specifications === 'string') {
       try {
         parsedProduct.specifications = JSON.parse(parsedProduct.specifications);
@@ -65,6 +72,8 @@ const ProductPage = () => {
         parsedProduct.specifications = [];
       }
     }
+    
+    // Parse highlights
     if (typeof parsedProduct.highlights === 'string') {
       try {
         parsedProduct.highlights = JSON.parse(parsedProduct.highlights);
@@ -73,14 +82,43 @@ const ProductPage = () => {
         parsedProduct.highlights = [];
       }
     }
+    
+    // Ensure showPrice is a boolean
+    if (parsedProduct.showPrice !== undefined) {
+      parsedProduct.showPrice = parsedProduct.showPrice === true || 
+                               parsedProduct.showPrice === 'true' || 
+                               parsedProduct.showPrice === 1;
+    }
+    
+    // Ensure price is a number
+    if (parsedProduct.price !== undefined && parsedProduct.price !== null) {
+      parsedProduct.price = parseFloat(parsedProduct.price);
+    }
+    
     parsedProduct.descriptionAlignment = ['left', 'center', 'right', 'justify'].includes(parsedProduct.descriptionAlignment)
       ? parsedProduct.descriptionAlignment
       : 'left';
+      
     return parsedProduct;
   }, [product]);
 
+  // Debug function to check product data
+  // const debugProductData = () => {
+  //   console.log('Product Data:', parseProductData);
+  //   console.log('Show Price:', parseProductData?.showPrice, typeof parseProductData?.showPrice);
+  //   console.log('Price:', parseProductData?.price, typeof parseProductData?.price);
+  // };
+
   const toggleEnquiryModal = () => {
     setShowEnquiryModal(!showEnquiryModal);
+  };
+
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+    if (!isFullScreen) {
+      // Reset zoom when entering full screen
+      setTransform({ scale: 1, originX: '50%', originY: '50%' });
+    }
   };
 
   const handleDownload = (url, name = `File`) => {
@@ -93,18 +131,73 @@ const ProductPage = () => {
   };
 
   const handleMouseMove = (e) => {
-    if (!imageRef.current) return;
+    if (!imageRef.current || isFullScreen) return;
     const rect = imageRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const originX = (x / rect.width) * 100; // Convert to percentage
-    const originY = (y / rect.height) * 100; // Convert to percentage
+    const originX = (x / rect.width) * 100;
+    const originY = (y / rect.height) * 100;
     setTransform({ scale: 1.5, originX: `${originX}%`, originY: `${originY}%` });
   };
 
   const handleMouseLeave = () => {
-    setTransform({ scale: 1, originX: '50%', originY: '50%' });
+    if (!isFullScreen) {
+      setTransform({ scale: 1, originX: '50%', originY: '50%' });
+    }
   };
+
+  const handleImageClick = () => {
+    if (!isFullScreen) {
+      toggleFullScreen();
+    }
+  };
+
+  const handleThumbnailClick = (img, index) => {
+    setSelectedImage(img);
+    setSelectedImageIndex(index);
+  };
+
+  const navigateImage = (direction) => {
+    if (!product?.images?.length) return;
+    
+    let newIndex;
+    if (direction === 'next') {
+      newIndex = (selectedImageIndex + 1) % product.images.length;
+    } else {
+      newIndex = (selectedImageIndex - 1 + product.images.length) % product.images.length;
+    }
+    
+    setSelectedImage(product.images[newIndex]);
+    setSelectedImageIndex(newIndex);
+  };
+
+  // Close full screen when pressing Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && isFullScreen) {
+        toggleFullScreen();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isFullScreen]);
+
+  // Navigate with arrow keys in full screen mode
+  useEffect(() => {
+    const handleArrowKeys = (e) => {
+      if (isFullScreen && product?.images?.length > 1) {
+        if (e.key === 'ArrowRight') {
+          navigateImage('next');
+        } else if (e.key === 'ArrowLeft') {
+          navigateImage('prev');
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleArrowKeys);
+    return () => document.removeEventListener('keydown', handleArrowKeys);
+  }, [isFullScreen, selectedImageIndex, product]);
 
   const renderContent = () => {
     if (!parseProductData) return null;
@@ -197,7 +290,7 @@ const ProductPage = () => {
           <div className="text-center text-red-600">
             {error}
             <button
-              onClick={() => fetchProduct()}
+              onClick={() => window.location.reload()}
               className="mt-4 px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-lg"
             >
               Retry
@@ -231,6 +324,85 @@ const ProductPage = () => {
         </div>
       )}
 
+      {/* Full Screen Image Modal */}
+      {isFullScreen && (
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-[1010] flex flex-col items-center justify-center p-4">
+          {/* Close Button */}
+          <button 
+            onClick={toggleFullScreen}
+            className="absolute top-4 right-4 p-3 text-white hover:bg-white hover:bg-opacity-20 rounded-full z-10"
+            title="Close"
+          >
+            <FaTimes size={24} />
+          </button>
+
+          {/* Main Image */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            <img
+              src={selectedImage}
+              alt={product.name}
+              className="max-w-full max-h-full object-contain"
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/800';
+              }}
+            />
+            
+            {/* Navigation Arrows */}
+            {product.images?.length > 1 && (
+              <>
+                <button 
+                  onClick={() => navigateImage('prev')}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 text-white hover:bg-white hover:bg-opacity-20 rounded-full"
+                  title="Previous Image"
+                >
+                  <FaChevronLeft size={24} />
+                </button>
+                <button 
+                  onClick={() => navigateImage('next')}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 text-white hover:bg-white hover:bg-opacity-20 rounded-full"
+                  title="Next Image"
+                >
+                  <FaChevronRight size={24} />
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Thumbnail Gallery */}
+          {product.images?.length > 1 && (
+            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 p-4 overflow-x-auto">
+              {product.images.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`w-16 h-16 rounded-md cursor-pointer overflow-hidden transition-all duration-300 border-2 ${
+                    selectedImageIndex === idx ? 'border-white' : 'border-gray-500 opacity-70 hover:opacity-100'
+                  }`}
+                  onClick={() => handleThumbnailClick(img, idx)}
+                >
+                  <img
+                    src={img}
+                    alt={`Thumbnail ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = 'https://via.placeholder.com/100';
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Debug button - remove in production */}
+      {/* <button 
+        onClick={debugProductData}
+        className="fixed bottom-4 right-4 bg-gray-800 text-white p-2 rounded text-xs z-50"
+        style={{display: process.env.NODE_ENV === 'development' ? 'block' : 'none'}}
+      >
+        Debug Data
+      </button> */}
+
       <div className="mx-auto w-full pt-4 pb-12 px-4">
         <div className="grid md:grid-cols-2 gap-12 bg-[#f6f6f6] p-6 rounded-lg">
           <div className="flex">
@@ -242,12 +414,12 @@ const ProductPage = () => {
                     className={`w-16 h-16 rounded-md cursor-pointer overflow-hidden transition-all duration-300 border-2 ${
                       selectedImage === img ? 'border-[#104686]' : 'border-gray-300 opacity-70 hover:opacity-100'
                     }`}
-                    onClick={() => setSelectedImage(img)}
+                    onClick={() => handleThumbnailClick(img, idx)}
                   >
                     <img
                       src={img}
                       alt={`Thumbnail ${idx + 1}`}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-cover"
                       onError={(e) => {
                         e.target.src = 'https://via.placeholder.com/100';
                       }}
@@ -255,31 +427,46 @@ const ProductPage = () => {
                     />
                   </div>
                 ))
-              ) 
-              // : (
-              //   <div className="w-16 h-16 rounded-md bg-gray-200 flex items-center justify-center text-gray-500">
-              //     No Images
-              //   </div>
-              // )
-              }
+              )}
             </div>
 
-            <div className="flex-1 overflow-hidden max-h-[400px] rounded-lg flex items-center justify-center">
+            <div 
+              className="flex-1 overflow-hidden max-h-[400px] rounded-lg flex items-center justify-center relative"
+              onMouseEnter={() => setShowZoomControls(true)}
+              onMouseLeave={() => setShowZoomControls(false)}
+            >
               {selectedImage ? (
                 <div className="relative w-full h-full overflow-hidden">
                   <img
                     ref={imageRef}
                     src={selectedImage}
                     alt={product.name}
-                    className="w-85 h-full object-contain transition-transform duration-300 ease-in-out"
-                    style={{ transform: `scale(${transform.scale})`, transformOrigin: `${transform.originX} ${transform.originY}` }}
+                    className="w-85 h-full object-contain transition-transform duration-300 ease-in-out cursor-zoom-in"
+                    style={{ 
+                      transform: `scale(${transform.scale})`,
+                      transformOrigin: `${transform.originX} ${transform.originY}`
+                    }}
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
+                    onClick={handleImageClick}
                     onError={(e) => {
                       e.target.src = 'https://via.placeholder.com/300';
                     }}
                     loading="lazy"
                   />
+                  
+                  {/* Full Screen Button */}
+                  {(showZoomControls || transform.scale > 1) && !isFullScreen && (
+                    <div className="absolute top-2 right-2 bg-white bg-opacity-70 rounded-lg p-2">
+                      <button 
+                        onClick={toggleFullScreen}
+                        className="p-1 text-gray-700 hover:bg-gray-200 rounded"
+                        title="Full Screen"
+                      >
+                        <FaExpand size={16} />
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-gray-500">No image available</div>
@@ -302,13 +489,15 @@ const ProductPage = () => {
                 ))}
               </ul>
             )}
-            {(parseProductData.showPrice === true || parseProductData.showPrice === "true") &&
-  parseProductData.price !== null &&
-  !isNaN(parseFloat(parseProductData.price)) && (
-    <p className="text-black font-bold text-2xl mt-6">
-      Price: ${parseFloat(parseProductData.price).toFixed(2)} USD
-    </p>
-)}
+            
+            {/* SIMPLIFIED PRICE DISPLAY - Always show for debugging */}
+            {parseProductData.price !== null && 
+             parseProductData.price !== undefined && 
+             !isNaN(parseProductData.price) && (
+              <p className="text-black font-bold text-2xl mt-6">
+                Price: ${parseProductData.price.toFixed(2)} USD
+              </p>
+            )}
 
             <button
               onClick={toggleEnquiryModal}

@@ -115,9 +115,10 @@ const Footer = () => {
             <ul className="space-y-1">
               <li><a href="/" className="hover:underline">Home</a></li>
               <li><a href="/moreproducts" className="hover:underline">Products</a></li>
-              <li><a href="/distributor" className="hover:underline">Distributor Apply</a></li>
               <li><a href="/about" className="hover:underline">About Us</a></li>
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+              <li><a href="/distributor" className="hover:underline">Join our Network</a></li>
+
             </ul>
           </div>
 
@@ -125,8 +126,8 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-3">Customer Service</h4>
             <ul className="space-y-1">
-              <li><a href="/support" className="hover:underline">Product Support</a></li>
-              <li><a href="/tech-support" className="hover:underline">Technical Support</a></li>
+              <li><a href="/contact" className="hover:underline">Product Support</a></li>
+              <li><a href="/contact" className="hover:underline">Technical Support</a></li>
             </ul>
           </div>
 

@@ -24,10 +24,11 @@ const ProductCard = ({ product }) => (
           {product.name}
         </h3>
         
-        {/* Optional highlight text */}
+        {/* Optional highlight text - fixed to handle object format */}
         {product.highlight && (
           <div className="text-sm text-gray-500 mb-3 line-clamp-2">
-            {product.highlight}
+            {/* Check if highlight is an object with text property */}
+            {typeof product.highlight === 'object' ? product.highlight.text : product.highlight}
           </div>
         )}
         

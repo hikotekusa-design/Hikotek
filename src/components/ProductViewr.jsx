@@ -14,7 +14,7 @@ function ProductViewer() {
     useEffect(() => {
         const fetchShowcaseProducts = async () => {
             try {
-                const result = await productApi.getShowcaseAllProducts();
+                const result = await productApi.getFeatured();
                 if (result.success && result.data) {
                     const processedProducts = result.data.map(product => ({
                         ...product,

@@ -128,4 +128,25 @@ getShowcaseAllProducts: async () => {
       throw error;
     }
   },
+  getFeatured: async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/products/featured`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to fetch featured products');
+      }
+
+      return data;
+    } catch (error) {
+      console.error('API Get Featured Products Error:', error);
+      throw error;
+    }
+  },
+
 }
