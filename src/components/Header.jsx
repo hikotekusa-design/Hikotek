@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Header.css";
-import HikotekLogo from "../assets/Hikotek_Logo.png";
+import HikotekLogo from "../assets/Hikotek_Logo.png"; // Fallback logo
 import ProductDropdown from "./ProductDropdown";
 import GlobeMap from "./GlobeMap";
 import { productApi } from "../services/productApi";
 import { publicFooterApi } from '../services/FooterApi';
+import { AboutApi } from '../services/AboutApi'; // Import the About API
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,6 +16,7 @@ function Header() {
   const [showResults, setShowResults] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [footerData, setFooterData] = useState(null);
+  const [aboutData, setAboutData] = useState(null); // State for about data
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
@@ -24,26 +26,33 @@ function Header() {
 
   // Fetch footer data
   useEffect(() => {
-    const fetchFooterData = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await publicFooterApi.getActiveFooter();
         
-        if (response.success) {
-          setFooterData(response.data);
+        // Fetch footer data
+        const footerResponse = await publicFooterApi.getActiveFooter();
+        if (footerResponse.success) {
+          setFooterData(footerResponse.data);
         } else {
           setError('Failed to load footer data');
         }
+
+        // Fetch about data for logo
+        const aboutResponse = await AboutApi.get();
+        if (aboutResponse.success && aboutResponse.data) {
+          setAboutData(aboutResponse.data);
+        }
       } catch (err) {
-        console.error('Error fetching footer data:', err);
-        setError('Failed to load footer information');
+        console.error('Error fetching data:', err);
+        setError('Failed to load information');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFooterData();
+    fetchData();
   }, []);
 
   // Close results dropdown when clicking outside
@@ -98,6 +107,9 @@ function Header() {
 
   // Get email from footer data or use fallback
   const contactEmail = footerData?.email || "info@hikotek.com";
+  
+  // Get logo from about data or use fallback
+  const logoUrl = aboutData?.logo || HikotekLogo;
 
   return (
     <>
@@ -138,7 +150,15 @@ function Header() {
               <i className={`fas ${isMenuOpen ? "fa-times" : "fa-bars"}`}></i>
             </button>
             <a href="/">
-              <img src={HikotekLogo} alt="Hikotek Logo" className="logo" />
+              <img 
+                src={logoUrl} 
+                alt="Hikotek Logo" 
+                className="logo" 
+                onError={(e) => {
+                  // Fallback to local logo if the URL fails
+                  e.target.src = HikotekLogo;
+                }}
+              />
             </a>
           </div>
 

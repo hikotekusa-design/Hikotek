@@ -495,7 +495,7 @@ const ProductPage = () => {
              parseProductData.price !== undefined && 
              !isNaN(parseProductData.price) && (
               <p className="text-black font-bold text-2xl mt-6">
-                Price: ${parseProductData.price.toFixed(2)} USD
+                Price: {parseProductData.price.toFixed(2)} USD
               </p>
             )}
 

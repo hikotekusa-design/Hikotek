@@ -109,7 +109,7 @@ function MoreProductsPg() {
 
       <style jsx>{`
         .product-card {
-          height: 450px;
+          height: 430px;
         }
         
         @media (max-width: 640px) {

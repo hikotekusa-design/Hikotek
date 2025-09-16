@@ -25,12 +25,12 @@ const ProductCard = ({ product }) => (
         </h3>
         
         {/* Optional highlight text - fixed to handle object format */}
-        {product.highlight && (
+        {/* {product.highlight && (
           <div className="text-sm text-gray-500 mb-3 line-clamp-2">
             {/* Check if highlight is an object with text property */}
-            {typeof product.highlight === 'object' ? product.highlight.text : product.highlight}
-          </div>
-        )}
+            {/* {typeof product.highlight === 'object' ? product.highlight.text : product.highlight} */}
+          {/* </div> */}
+        {/* )}  */}
         
         {/* Price and other details would go here */}
         <div className="mt-auto">

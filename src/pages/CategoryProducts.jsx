@@ -8,7 +8,6 @@ const getHighlightText = (highlight) => {
   if (typeof highlight === 'string') return highlight;
   if (Array.isArray(highlight)) return highlight[0] || 'No highlights available';
   if (highlight && typeof highlight === 'object') {
-    // Try to extract text from object properties
     return highlight.text || highlight.title || highlight.description || 
            highlight.value || 'No highlights available';
   }
@@ -28,9 +27,9 @@ const ProductCard = ({ product }) => (
           }}
         />
         <div className="text-center text-xl mt-1 font-semibold">{product.name}</div>
-        <h3 className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">
-          {getHighlightText(product.highlight)}
-        </h3>
+        {/* <h3 className="text-center font-medium text-sm mt-1 px-1 line-clamp-2 text-gray-500">
+          {getHighlightText(product.highlights)}
+        </h3> */}
       </div>
     </div>
   </Link>
@@ -38,8 +37,7 @@ const ProductCard = ({ product }) => (
 
 function CategoryProducts() {
   const location = useLocation();
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]); // Can be array (no subcategories) or object (with subcategories)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const category = location.state?.category;
@@ -54,15 +52,30 @@ function CategoryProducts() {
       setLoading(true);
       const response = await productApi.getShowcaseAllProducts();
       if (response.success) {
-        setProducts(response.data);
-        
-        if (category) {
-          const filtered = response.data.filter(product => 
-            product.category && product.category.toLowerCase() === category.toLowerCase()
-          );
-          setFilteredProducts(filtered);
+        // Filter products by category if provided, else show all
+        const filtered = category
+          ? response.data.filter(product => 
+              product.category && product.category.toLowerCase() === category.toLowerCase()
+            )
+          : response.data;
+
+        // Check if any products have a non-empty subcategory
+        const hasSubcategories = filtered.some(product => product.subcategory && product.subcategory.trim());
+
+        if (hasSubcategories) {
+          // Group products by subcategory
+          const groupedBySubcategory = filtered.reduce((acc, product) => {
+            const subcat = product.subcategory?.trim() || 'No Subcategory';
+            if (!acc[subcat]) {
+              acc[subcat] = [];
+            }
+            acc[subcat].push(product);
+            return acc;
+          }, {});
+          setProducts(groupedBySubcategory);
         } else {
-          setFilteredProducts(response.data);
+          // No subcategories, store as array
+          setProducts(filtered);
         }
       } else {
         setError(response.error || 'Failed to fetch products');
@@ -101,18 +114,37 @@ function CategoryProducts() {
     );
   }
 
+  const hasProducts = Array.isArray(products) ? products.length > 0 : Object.values(products).some(group => group.length > 0);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">
         {category ? `${category} Products` : 'All Products'}
       </h1>
-      
-      {filteredProducts.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+
+      {hasProducts ? (
+        Array.isArray(products) ? (
+          // No subcategories, render all products in a single grid
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {products.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          // Subcategories exist, render grouped by subcategory
+          Object.entries(products).map(([subcategory, group]) => (
+            <div key={subcategory} className="mb-8">
+              <h2 className="text-2xl font-semibold mb-4 text-left border-b border-gray-300 pb-2">
+                {subcategory}
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {group.map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
+          ))
+        )
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-500 text-lg">
