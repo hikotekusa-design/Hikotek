@@ -171,11 +171,11 @@ function ProductViewer() {
 
                                 {index === 2 && (
                                     <>
-                                        <motion.p className="product-description">
+                                        {/* <motion.p className="product-description">
                                             {typeof product?.highlight === 'string'
                                                 ? product.highlight
                                                 : product?.highlight?.text || 'Product description'}
-                                        </motion.p>
+                                        </motion.p> */}
                                         <motion.button
                                             className="view-product-button"
                                             onClick={(e) => {

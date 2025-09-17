@@ -122,12 +122,13 @@ const ProductPage = () => {
   };
 
   const handleDownload = (url, name = `File`) => {
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = name;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // const link = document.createElement('a');
+    // link.href = url;
+    // link.download = name;
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    window.open(url, '_blank');
   };
 
   const handleMouseMove = (e) => {
@@ -500,11 +501,11 @@ const ProductPage = () => {
             )}
 
             <button
-              onClick={toggleEnquiryModal}
-              className="mt-6 px-6 py-3 rounded-lg text-lg font-medium transition-all duration-300 border-2 border-[#104686] text-[#104686] hover:bg-[#104686] hover:text-white hover:shadow-lg"
-            >
-              Enquire Now
-            </button>
+  onClick={toggleEnquiryModal}
+  className="mt-4 px-4 py-2 rounded-full text-base font-semibold transition-all duration-300 bg-gradient-to-r from-[#104686] to-[#2a6bb8] text-white hover:from-[#2a6bb8] hover:to-[#104686] hover:shadow-md hover:scale-105 active:scale-95 animate-pulse hover:animate-none border-2 border-transparent shadow-sm"
+>
+  Enquire Now
+</button>
           </div>
         </div>
 

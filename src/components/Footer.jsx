@@ -263,10 +263,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="bg-gray-800 text-white py-4 text-center text-sm">
-          <p>© {new Date().getFullYear()} Hikotek LLC. All rights reserved.</p>
-        </div>
+       
       </footer>
 
       {/* Toast Notification */}
