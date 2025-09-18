@@ -209,31 +209,34 @@ function Header() {
             )}
           </div>
 
-          <div className="nav-right">
-            <div className="globe-dropdown">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 64 64"
-                fill="none"
-                stroke="#104686"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-8 h-10"
-                onClick={toggleGlobeDropdown}
-              >
-                <circle cx="32" cy="32" r="30" />
-                <ellipse cx="32" cy="32" rx="14" ry="30" />
-                <path d="M2 24 C18 16, 46 16, 62 24" />
-                <path d="M2 40 C18 48, 46 48, 62 40" />
-                <line x1="32" y1="2" x2="32" y2="62" />
-                <line x1="2" y1="32" x2="62" y2="32" />
-              </svg>
+          {/* Globe icon - only show on desktop */}
+          {!isMobile && (
+            <div className="nav-right">
+              <div className="globe-dropdown">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  stroke="#104686"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="responsive-globe"
+                  onClick={toggleGlobeDropdown}
+                >
+                  <circle cx="32" cy="32" r="30" />
+                  <ellipse cx="32" cy="32" rx="14" ry="30" />
+                  <path d="M2 24 C18 16, 46 16, 62 24" />
+                  <path d="M2 40 C18 48, 46 48, 62 40" />
+                  <line x1="32" y1="2" x2="32" y2="62" />
+                  <line x1="2" y1="32" x2="62" y2="32" />
+                </svg>
+              </div>
             </div>
-          </div>
+          )}
         </nav>
 
-        {/* Nav Menu Bar */}
+        {/* Nav Menu Bar - includes globe icon on mobile */}
         <div className={`nav-center-bar ${isMenuOpen ? "mobile-open" : ""}`}>
           <div className="nav-center">
             <div className="nav-item">
@@ -265,6 +268,32 @@ function Header() {
                 Join our Network
               </a>
             </div>
+            
+            {/* Globe icon for mobile - inside the menu */}
+            {isMobile && (
+              <div className="nav-item mobile-globe-item">
+                <div className="mobile-globe" onClick={toggleGlobeDropdown}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    stroke="#104686"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="responsive-globe"
+                  >
+                    <circle cx="32" cy="32" r="30" />
+                    <ellipse cx="32" cy="32" rx="14" ry="30" />
+                    <path d="M2 24 C18 16, 46 16, 62 24" />
+                    <path d="M2 40 C18 48, 46 48, 62 40" />
+                    <line x1="32" y1="2" x2="32" y2="62" />
+                    <line x1="2" y1="32" x2="62" y2="32" />
+                  </svg>
+                  <span>Global Network</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </header>
